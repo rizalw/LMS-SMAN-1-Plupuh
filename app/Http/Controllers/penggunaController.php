@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\pengguna;
+use App\Models\mapel;
 use Session;
 
 class penggunaController extends Controller
@@ -49,5 +50,23 @@ class penggunaController extends Controller
         } else {
             return redirect('/login');
         }
+    }
+    public function createMapel()
+    {
+        $guru = pengguna::where('role', "guru")->get();
+        return view("contents.insertMapel", ['guru' => $guru]);
+    }
+    public function uploadMapel( Request $request){
+        $nama_mapel = $request->nama_mapel;
+        $nama_guru = $request->nama_guru;
+        $deskripsi = $request->deskripsi;
+        $guru = pengguna::where('email', $nama_guru)->get();
+        $id_guru = $guru[0]->id;
+        $mapel = new mapel();
+        $mapel->id_guru = $id_guru;
+        $mapel->nama = $nama_mapel;
+        $mapel->deskripsi = $deskripsi;
+        $mapel->save();
+        return redirect('/home');
     }
 }

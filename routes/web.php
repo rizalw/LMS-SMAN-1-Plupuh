@@ -21,3 +21,5 @@ Route::get('/login', [penggunaController::class, 'login'])->name('login');
 Route::post('/login', [penggunaController::class, 'loginQuery'])->name('loginQuery');
 Route::get('/logout', [penggunaController::class, 'logout'])->name('logout');
 Route::get('/home', [penggunaController::class, 'home'])->name('home');
+Route::get('/insertMapel', [penggunaController::class, 'createMapel'])->name('create mapel');
+Route::post('/insertMapel', [penggunaController::class, 'uploadMapel'])->name('upload mapel');
