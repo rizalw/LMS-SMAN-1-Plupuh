@@ -12,34 +12,41 @@ class penggunaController extends Controller
     {
         return view("contents.login");
     }
-    public function loginQuery(Request $request){
-        $email = $request ->email;
-        $password = $request ->password;
-        $boolEmail = pengguna::where('email', $email )->exists();
-        $boolPassword = pengguna::where('password', $password )->exists();
+    public function loginQuery(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        $boolEmail = pengguna::where('email', $email)->exists();
+        $boolPassword = pengguna::where('password', $password)->exists();
         $status = $boolEmail && $boolPassword;
-        if ($status){
+        if ($status) {
             session(['email' => $email]);
             session(['is_login' => "True"]);
             return redirect('/home');
-        }
-        else{
+        } else {
             return redirect('/login');
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->flush();
         return redirect('/login');
     }
 
-    public function home(){
-        if(session()->exists('is_login')){
+    public function home()
+    {
+        if (session()->exists('is_login')) {
             $email = session('email');
-            $email_name = explode("@", $email);
-            return view("contents.home", ['email' => $email_name[0]]);
-        }
-        else{
+            $data_user = pengguna::where('email', $email)->get();
+            $role = $data_user[0]->role;
+            if ($role == "admin") {
+                return view("contents.admin_page", ['user' => $data_user[0]]);
+            } elseif ($role == "siswa") {
+                $email_name = explode("@", $email);
+                return view("contents.home", ['email' => $email_name[0]]);
+            }
+        } else {
             return redirect('/login');
         }
     }
