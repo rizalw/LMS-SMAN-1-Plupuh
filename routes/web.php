@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\penggunaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('contents.welcome');
 });
+Route::get('/login', [penggunaController::class, 'login'])->name('login');
+Route::get('/logout', [penggunaController::class, 'logout'])->name('logout');
+Route::post('/login', [penggunaController::class, 'loginQuery'])->name('loginQuery');
+Route::get('/home', [penggunaController::class, 'home'])->name('home');
