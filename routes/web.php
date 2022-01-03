@@ -23,3 +23,5 @@ Route::get('/logout', [penggunaController::class, 'logout'])->name('logout');
 Route::get('/home', [penggunaController::class, 'home'])->name('home');
 Route::get('/insertMapel', [penggunaController::class, 'createMapel'])->name('create mapel');
 Route::post('/insertMapel', [penggunaController::class, 'uploadMapel'])->name('upload mapel');
+Route::get('/insertBab/{id}', [penggunaController::class, 'createBab'])->name('create bab');
+Route::post('/insertBab', [penggunaController::class, 'uploadBab'])->name('upload bab');
