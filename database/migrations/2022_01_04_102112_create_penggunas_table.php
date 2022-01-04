@@ -15,9 +15,11 @@ class CreatePenggunasTable extends Migration
     {
         Schema::create('penggunas', function (Blueprint $table) {
             $table->id();
+            $table->string("Nama");
             $table->string("email");
             $table->string("password");
             $table->string("role");
+            $table->string("id_kelas")->references("id")->on("kelas")->onDelete("cascade")->nullable();
             $table->timestamps();
         });
     }

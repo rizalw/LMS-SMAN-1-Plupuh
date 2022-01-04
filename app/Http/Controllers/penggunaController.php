@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\pengguna;
 use App\Models\mapel;
 use App\Models\bab;
+use App\Models\kelas;
 
 class penggunaController extends Controller
 {
@@ -48,7 +49,8 @@ class penggunaController extends Controller
                 return view("contents.home", ['email' => $email_name[0]]);
             } elseif ($role == "guru") {
                 $daftar_mapel = mapel::where('id_guru', $data_user[0]->id)->get();
-                return view("contents.guru_page", ['user' => $data_user[0], 'mapel' => $daftar_mapel]);
+                $daftar_bab = bab::all();
+                return view("contents.guru_page", ['user' => $data_user[0], 'mapel' => $daftar_mapel, 'bab' => $daftar_bab]);
             }
         } else {
             return redirect('/login');
@@ -86,5 +88,19 @@ class penggunaController extends Controller
         $mapel->deskripsi = $deskripsi;
         $mapel->save();
         return redirect('/home');
+    }
+    public function createKelas()
+    {
+        $daftar_kelas = kelas::all();
+        return view("contents.createKelas", ['daftar_kelas' => $daftar_kelas]);
+    }
+    public function uploadKelas(Request $request){
+        $nama_kelas = $request->nama;
+        $tahun_ajaran = $request->tahun_ajaran;
+        $kelas = new kelas();
+        $kelas->nama_kelas = $nama_kelas;
+        $kelas->tahun_ajaran = $tahun_ajaran;
+        $kelas->save();
+        return redirect('/createKelas');
     }
 }

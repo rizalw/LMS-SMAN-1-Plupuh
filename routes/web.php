@@ -25,3 +25,5 @@ Route::get('/insertMapel', [penggunaController::class, 'createMapel'])->name('cr
 Route::post('/insertMapel', [penggunaController::class, 'uploadMapel'])->name('upload mapel');
 Route::get('/insertBab/{id}', [penggunaController::class, 'createBab'])->name('create bab');
 Route::post('/insertBab', [penggunaController::class, 'uploadBab'])->name('upload bab');
+Route::get('/createKelas', [penggunaController::class, 'createKelas'])->name('create kelas');
+Route::post('/createKelas', [penggunaController::class, 'uploadKelas'])->name('upload kelas');
