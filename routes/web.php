@@ -33,3 +33,5 @@ Route::post('/assignMapel', [penggunaController::class, 'assignMapelFinal'])->na
 Route::get('/assignSiswa', [penggunaController::class, 'assignSiswa'])->name('assign siswa');
 Route::get('/assignSiswa/{id}', [penggunaController::class, 'assignSiswaProcess'])->name('assign siswa process');
 Route::post('/assignSiswa', [penggunaController::class, 'assignSiswaFinal'])->name('assign siswa final');
+Route::get('/createTugas/{id}', [penggunaController::class, 'createTugas'])->name('create tugas');
+Route::post('/createTugas', [penggunaController::class, 'createTugasFinal'])->name('create tugas final');

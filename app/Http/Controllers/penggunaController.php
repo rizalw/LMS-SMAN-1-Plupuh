@@ -8,6 +8,7 @@ use App\Models\mapel;
 use App\Models\bab;
 use App\Models\kelas;
 use App\Models\kelas_mapel;
+use App\Models\tugas;
 
 class penggunaController extends Controller
 {
@@ -138,6 +139,25 @@ class penggunaController extends Controller
         $siswa = pengguna::find($id_siswa);
         $siswa->id_kelas = $id_kelas;
         $siswa->save();
+        return redirect('/home');
+    }
+    public function createTugas($id_bab){
+        $bab = bab::find($id_bab);
+        return view("contents.createTugas", ['bab' => $bab]);
+    }
+    public function createTugasFinal(Request $request){
+        $id_bab = $request->id_bab;
+        $nama_tugas = $request->nama;
+        $deskripsi_tugas = $request->deskripsi;
+        $tenggat_tanggal = $request->tanggal;
+        $tenggat_waktu = $request->waktu;
+        $deadline = date('Y-m-d H:i:s', strtotime("$tenggat_tanggal $tenggat_waktu"));
+        $tugas = new tugas();
+        $tugas->id_bab = $id_bab;
+        $tugas->nama = $nama_tugas;
+        $tugas->deskripsi = $deskripsi_tugas;
+        $tugas->deadline = $deadline;
+        $tugas->save();
         return redirect('/home');
     }
 }
