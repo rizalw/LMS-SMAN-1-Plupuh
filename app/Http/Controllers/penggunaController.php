@@ -7,6 +7,7 @@ use App\Models\pengguna;
 use App\Models\mapel;
 use App\Models\bab;
 use App\Models\kelas;
+use App\Models\kelas_mapel;
 
 class penggunaController extends Controller
 {
@@ -102,5 +103,23 @@ class penggunaController extends Controller
         $kelas->tahun_ajaran = $tahun_ajaran;
         $kelas->save();
         return redirect('/createKelas');
+    }
+    public function assignMapel(){
+        $daftar_mapel = mapel::all();
+        return view("contents.assignMapel", ['daftar_mapel' => $daftar_mapel]);
+    }
+    public function assignMapelProcess($id){
+        $data_mapel  = mapel::find($id);
+        $daftar_kelas = kelas::all();
+        return view("contents.assignMapelProcess", ['daftar_kelas' => $daftar_kelas, 'data_mapel' => $data_mapel]);
+    }
+    public function assignMapelFinal(Request $request){
+        $id_kelas = $request->id_kelas;
+        $id_mapel = $request->id_mapel;
+        $kelas_mapel = new kelas_mapel();
+        $kelas_mapel->id_kelas = $id_kelas;
+        $kelas_mapel->id_mapel = $id_mapel;
+        $kelas_mapel->save();
+        return redirect("/assignMapel");
     }
 }

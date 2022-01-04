@@ -27,3 +27,6 @@ Route::get('/insertBab/{id}', [penggunaController::class, 'createBab'])->name('c
 Route::post('/insertBab', [penggunaController::class, 'uploadBab'])->name('upload bab');
 Route::get('/createKelas', [penggunaController::class, 'createKelas'])->name('create kelas');
 Route::post('/createKelas', [penggunaController::class, 'uploadKelas'])->name('upload kelas');
+Route::get('/assignMapel', [penggunaController::class, 'assignMapel'])->name('assign mapel');
+Route::get('/assignMapel/{id}', [penggunaController::class, 'assignMapelProcess'])->name('assign mapel process');
+Route::post('/assignMapel', [penggunaController::class, 'assignMapelFinal'])->name('assign mapel final');
