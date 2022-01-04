@@ -45,7 +45,7 @@
                 <div class="d-flex flex-row-reverse bd-highlight align-items-center">
                     <div class=" bd-highlight">
                         <a class="nav-link fs-5" aria-current="page" href="#">
-                            <b class="p-1" style="color: #004267;">Masuk</b>
+                            <b class="p-1" data-bs-toggle="modal" data-bs-target="#exampleModal" style="color: #004267;">Masuk</b>
                             <img src="../img/enter.png" alt="" width="35">
                         </a>
                     </div>
@@ -54,11 +54,49 @@
         </div>
     </nav>
 
+    <!-- Modal Login -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold" style="color: #004267;">Masuk</h4>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+                        <!-- <span aria-hidden="true">&times;</span> -->
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-3">
+                        <!-- <i class="fas fa-envelope prefix grey-text"></i> -->
+                        <input type="email" id="defaultForm-email" class="form-control validate" placeholder="Masukkan Email">
+                        <!-- <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label> -->
+                    </div>
+
+                    <div class="md-form mb-1">
+                        <!-- <i class="fas fa-lock prefix grey-text"></i> -->
+                        <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Masukkan Sandi"> 
+                        <!-- <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label> -->
+                    </div>
+
+                    <div class="checkbox mt-3">
+                        <label for="">
+                            <input type="checkbox" name="rememberMe" value="rememberMe"> <label for="" class="form-text"><b>Ingat Saya</b></label>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary">Masuk</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Content -->
     <div class="text-center">
         <img src="../img/Landing Page + Text.png" class="img-fluid" alt="">
     </div>
-    
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
