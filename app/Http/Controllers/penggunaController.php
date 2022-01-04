@@ -122,4 +122,22 @@ class penggunaController extends Controller
         $kelas_mapel->save();
         return redirect("/assignMapel");
     }
+    public function assignSiswa(){
+        $daftar_siswa = pengguna::where('role', "siswa")->get();
+        return view("contents.assignSiswa", ['daftar_siswa' => $daftar_siswa]);
+    }
+    public function assignSiswaProcess($id)
+    {
+        $data_siswa = pengguna::find($id);
+        $daftar_kelas = kelas::all();
+        return view('contents.assignSiswaProcess', ['daftar_kelas' => $daftar_kelas, 'data_siswa' => $data_siswa]);
+    }
+    public function assignSiswaFinal(Request $request){
+        $id_siswa = $request->siswa;
+        $id_kelas = $request->id_kelas;
+        $siswa = pengguna::find($id_siswa);
+        $siswa->id_kelas = $id_kelas;
+        $siswa->save();
+        return redirect('/home');
+    }
 }

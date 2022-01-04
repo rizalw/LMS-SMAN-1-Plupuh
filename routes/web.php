@@ -30,3 +30,6 @@ Route::post('/createKelas', [penggunaController::class, 'uploadKelas'])->name('u
 Route::get('/assignMapel', [penggunaController::class, 'assignMapel'])->name('assign mapel');
 Route::get('/assignMapel/{id}', [penggunaController::class, 'assignMapelProcess'])->name('assign mapel process');
 Route::post('/assignMapel', [penggunaController::class, 'assignMapelFinal'])->name('assign mapel final');
+Route::get('/assignSiswa', [penggunaController::class, 'assignSiswa'])->name('assign siswa');
+Route::get('/assignSiswa/{id}', [penggunaController::class, 'assignSiswaProcess'])->name('assign siswa process');
+Route::post('/assignSiswa', [penggunaController::class, 'assignSiswaFinal'])->name('assign siswa final');
