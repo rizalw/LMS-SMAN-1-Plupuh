@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class tugas extends Model
 {
     use HasFactory;
+
+    public function babs()
+    {
+      return $this->belongsTo(bab::class, "id_bab");
+    }
 }

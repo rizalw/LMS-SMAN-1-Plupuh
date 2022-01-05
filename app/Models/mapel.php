@@ -16,4 +16,9 @@ class mapel extends Model
     public function kelas(){
         return $this->belongsToMany(kelas::class, "kelas_mapels", "id_mapel", "id_kelas");
     }
+
+    public function babs()
+    {
+        return $this->hasMany(bab::class, "id_mapel");
+    }
 }
