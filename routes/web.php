@@ -38,3 +38,5 @@ Route::post('/createTugas', [penggunaController::class, 'createTugasFinal'])->na
 Route::get('/tugas/{id}', [penggunaController::class, 'menuTugas'])->name('menu tugas');
 Route::get('/tugas/submit/{id}', [penggunaController::class, 'menuTugasProcess'])->name('menu tugas process');
 Route::post('/tugas/submit', [penggunaController::class, 'submitTugas'])->name('submit tugas');
+Route::get('/cekTugas/{id}', [penggunaController::class, 'cekTugas'])->name('cek tugas');
+Route::get('/downloadTugas/{id}', [penggunaController::class, 'downloadTugas'])->name('download tugas');
