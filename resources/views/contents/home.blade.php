@@ -6,6 +6,14 @@
   {{ $data_siswa->kelas->nama_kelas}}<br><br>
   Kelas ini memiliki mata pelajaran berikut<br>
   @foreach($data_siswa->kelas->mapels as $mapel)
-  {{ $mapel->nama }}
+    {{ $mapel->nama }}<br><br>
+    Daftar Tugas di mapel tersebut<br>
+    @foreach($daftar_tugas as $tugas)
+      @if( $tugas->babs->mapels->id == $mapel->id)
+      <a href="{{ route('menu tugas', ['id' => $tugas -> id ]) }}">
+        {{ $tugas->nama}}
+      </a>
+      @endif
+    @endforeach
   @endforeach
 @endif

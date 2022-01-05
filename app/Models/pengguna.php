@@ -7,14 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class pengguna extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = "penggunas";
+  protected $table = "penggunas";
 
-    protected $primaryKey = "id";
+  protected $primaryKey = "id";
 
-    public function kelas()
-    {
-      return $this->belongsTo(kelas::class, "id_kelas");
-    }
+  public function kelas()
+  {
+    return $this->belongsTo(kelas::class, "id_kelas");
+  }
+
+  public function tugas()
+  {
+    return $this->belongsToMany(tugas::class, "siswa_tugas", "id_siswa", "id_tugas");
+  }
 }

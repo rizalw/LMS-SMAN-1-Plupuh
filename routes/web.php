@@ -35,3 +35,6 @@ Route::get('/assignSiswa/{id}', [penggunaController::class, 'assignSiswaProcess'
 Route::post('/assignSiswa', [penggunaController::class, 'assignSiswaFinal'])->name('assign siswa final');
 Route::get('/createTugas/{id}', [penggunaController::class, 'createTugas'])->name('create tugas');
 Route::post('/createTugas', [penggunaController::class, 'createTugasFinal'])->name('create tugas final');
+Route::get('/tugas/{id}', [penggunaController::class, 'menuTugas'])->name('menu tugas');
+Route::get('/tugas/submit/{id}', [penggunaController::class, 'menuTugasProcess'])->name('menu tugas process');
+Route::post('/tugas/submit', [penggunaController::class, 'submitTugas'])->name('submit tugas');

@@ -8,7 +8,9 @@ use App\Models\mapel;
 use App\Models\bab;
 use App\Models\kelas;
 use App\Models\kelas_mapel;
+use App\Models\siswa_tugas;
 use App\Models\tugas;
+use Carbon\Carbon;
 
 class penggunaController extends Controller
 {
@@ -49,7 +51,7 @@ class penggunaController extends Controller
             } elseif ($role == "siswa") {
                 $daftar_tugas = tugas::all();
                 $nama = $data_user[0]->Nama;
-                return view("contents.home", [ 'nama' => $nama, 'data_siswa' => $data_user[0], 'daftar_tugas' => $daftar_tugas]);
+                return view("contents.home", ['nama' => $nama, 'data_siswa' => $data_user[0], 'daftar_tugas' => $daftar_tugas]);
             } elseif ($role == "guru") {
                 $daftar_mapel = mapel::where('id_guru', $data_user[0]->id)->get();
                 $daftar_bab = bab::all();
@@ -64,7 +66,8 @@ class penggunaController extends Controller
         $guru = pengguna::where('role', "guru")->get();
         return view("contents.insertMapel", ['guru' => $guru]);
     }
-    public function uploadMapel( Request $request){
+    public function uploadMapel(Request $request)
+    {
         $nama_mapel = $request->nama_mapel;
         $nama_guru = $request->nama_guru;
         $deskripsi = $request->deskripsi;
@@ -77,11 +80,13 @@ class penggunaController extends Controller
         $mapel->save();
         return redirect('/home');
     }
-    public function createBab($id){
+    public function createBab($id)
+    {
         $mapel = mapel::find($id);
         return view("Contents.insertBab", ['mapel' => $mapel]);
     }
-    public function uploadBab(Request $request){
+    public function uploadBab(Request $request)
+    {
         $id_mapel = $request->id_mapel;
         $nama_bab = $request->nama;
         $deskripsi = $request->deskripsi;
@@ -97,7 +102,8 @@ class penggunaController extends Controller
         $daftar_kelas = kelas::all();
         return view("contents.createKelas", ['daftar_kelas' => $daftar_kelas]);
     }
-    public function uploadKelas(Request $request){
+    public function uploadKelas(Request $request)
+    {
         $nama_kelas = $request->nama;
         $tahun_ajaran = $request->tahun_ajaran;
         $kelas = new kelas();
@@ -106,16 +112,19 @@ class penggunaController extends Controller
         $kelas->save();
         return redirect('/createKelas');
     }
-    public function assignMapel(){
+    public function assignMapel()
+    {
         $daftar_mapel = mapel::all();
         return view("contents.assignMapel", ['daftar_mapel' => $daftar_mapel]);
     }
-    public function assignMapelProcess($id){
+    public function assignMapelProcess($id)
+    {
         $data_mapel  = mapel::find($id);
         $daftar_kelas = kelas::all();
         return view("contents.assignMapelProcess", ['daftar_kelas' => $daftar_kelas, 'data_mapel' => $data_mapel]);
     }
-    public function assignMapelFinal(Request $request){
+    public function assignMapelFinal(Request $request)
+    {
         $id_kelas = $request->id_kelas;
         $id_mapel = $request->id_mapel;
         $kelas_mapel = new kelas_mapel();
@@ -124,7 +133,8 @@ class penggunaController extends Controller
         $kelas_mapel->save();
         return redirect("/assignMapel");
     }
-    public function assignSiswa(){
+    public function assignSiswa()
+    {
         $daftar_siswa = pengguna::where('role', "siswa")->get();
         return view("contents.assignSiswa", ['daftar_siswa' => $daftar_siswa]);
     }
@@ -134,7 +144,8 @@ class penggunaController extends Controller
         $daftar_kelas = kelas::all();
         return view('contents.assignSiswaProcess', ['daftar_kelas' => $daftar_kelas, 'data_siswa' => $data_siswa]);
     }
-    public function assignSiswaFinal(Request $request){
+    public function assignSiswaFinal(Request $request)
+    {
         $id_siswa = $request->siswa;
         $id_kelas = $request->id_kelas;
         $siswa = pengguna::find($id_siswa);
@@ -142,11 +153,13 @@ class penggunaController extends Controller
         $siswa->save();
         return redirect('/home');
     }
-    public function createTugas($id_bab){
+    public function createTugas($id_bab)
+    {
         $bab = bab::find($id_bab);
         return view("contents.createTugas", ['bab' => $bab]);
     }
-    public function createTugasFinal(Request $request){
+    public function createTugasFinal(Request $request)
+    {
         $id_bab = $request->id_bab;
         $nama_tugas = $request->nama;
         $deskripsi_tugas = $request->deskripsi;
@@ -160,5 +173,49 @@ class penggunaController extends Controller
         $tugas->deadline = $deadline;
         $tugas->save();
         return redirect('/home');
+    }
+    public function menuTugas($id)
+    {
+        $tugas = tugas::find($id);
+        $deadline = date('Y-m-d H:i:s', strtotime("$tugas->deadline"));
+        $interval = Carbon::now()->diff($deadline);
+        $remaining = $interval->format('%y %m %d %h:%i:%s');
+        $remaining = explode(" ", $remaining);
+        $email = session('email');
+        $data_user = pengguna::where('email', $email)->get();
+        $id_siswa = $data_user[0]->id;
+        $data_tugas = siswa_tugas::where('id_siswa', $id_siswa)->get();
+        if (count($data_tugas) == 0) {
+            $status = "Belum Mengumpulkan";
+        } else {
+            $status = "Sudah Mengumpulkan";
+        }
+        return view('contents.detailTugas', ['tugas' => $tugas, 'remaining' => $remaining, 'status' => $status]);
+    }
+    public function menuTugasProcess($id)
+    {
+        $tugas = tugas::find($id);
+        $email = session('email');
+        $data_user = pengguna::where('email', $email)->get();
+        $id_siswa = $data_user[0]->id;
+        return view('contents.uploadTugas', ['tugas' => $tugas, 'id_siswa' => $id_siswa]);
+    }
+    public function submitTugas(Request $request)
+    {
+        if ($files = $request->file('file')) {
+            $file = $request->file('file');
+            $lokasi = 'uploaded/tugas/';
+            $nama_file = rand(1000, 20000) . "." . $files->getClientOriginalExtension();
+            $pathTugas = $file->storeAs('tugas', $nama_file);
+            $files->move($lokasi, $nama_file);
+            $vaccine = new siswa_tugas();
+            $vaccine->id_tugas = $request->id_tugas;
+            $vaccine->id_siswa = $request->id_siswa;
+            $vaccine->file_upload = $pathTugas;
+            $vaccine->save();
+            return redirect('/home');
+        } else {
+            return redirect('/home');
+        }
     }
 }
