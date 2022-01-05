@@ -40,3 +40,4 @@ Route::get('/tugas/submit/{id}', [penggunaController::class, 'menuTugasProcess']
 Route::post('/tugas/submit', [penggunaController::class, 'submitTugas'])->name('submit tugas');
 Route::get('/cekTugas/{id}', [penggunaController::class, 'cekTugas'])->name('cek tugas');
 Route::get('/downloadTugas/{id}', [penggunaController::class, 'downloadTugas'])->name('download tugas');
+Route::post('/nilaiTugas', [penggunaController::class, 'nilaiTugas'])->name('nilai tugas');

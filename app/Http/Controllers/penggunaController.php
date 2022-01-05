@@ -230,6 +230,13 @@ class penggunaController extends Controller
         $nama_file = $tugas->file_upload;
         $filepath = public_path('uploaded/' . $nama_file);
         return Response()->download($filepath);
-        // return redirect('/home');
+    }
+    public function nilaiTugas(Request $request){
+        $id_submission = $request->id_submission;
+        $nilai = $request->nilai;
+        $submission = siswa_tugas::find($id_submission);
+        $submission->nilai = $nilai;
+        $submission->save();
+        return redirect('/home');
     }
 }
