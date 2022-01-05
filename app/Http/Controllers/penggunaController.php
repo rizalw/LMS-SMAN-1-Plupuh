@@ -49,7 +49,7 @@ class penggunaController extends Controller
             } elseif ($role == "siswa") {
                 $daftar_tugas = tugas::all();
                 $nama = $data_user[0]->Nama;
-                return view("contents.home", [ 'nama' => $nama, 'data_siswa' => $data_user, 'daftar_tugas' => $daftar_tugas]);
+                return view("contents.home", [ 'nama' => $nama, 'data_siswa' => $data_user[0], 'daftar_tugas' => $daftar_tugas]);
             } elseif ($role == "guru") {
                 $daftar_mapel = mapel::where('id_guru', $data_user[0]->id)->get();
                 $daftar_bab = bab::all();

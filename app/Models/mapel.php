@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class mapel extends Model
 {
     use HasFactory;
+
+    protected $table = "mapels";
+
+    protected $primaryKey = "id";
+
+    public function kelas(){
+        return $this->belongsToMany(kelas::class, "kelas_mapels", "id_mapel", "id_kelas");
+    }
 }

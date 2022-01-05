@@ -17,4 +17,8 @@ class kelas extends Model
     {
         return $this->hasMany(pengguna::class, "id_kelas");
     }
+
+    public function mapels(){
+        return $this->belongsToMany(mapel::class, "kelas_mapels", "id_kelas", "id_mapel");
+    }
 }
