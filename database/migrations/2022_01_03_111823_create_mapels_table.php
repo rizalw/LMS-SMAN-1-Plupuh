@@ -15,7 +15,8 @@ class CreateMapelsTable extends Migration
     {
         Schema::create('mapels', function (Blueprint $table) {
             $table->id();
-            $table->string("id_guru")->references("id")->on("penggunas")->onDelete("cascade");
+            $table->unsignedBigInteger("id_guru");
+            $table->foreign("id_guru")->references('id')->on('penggunas')->onDelete("cascade");
             $table->string("nama");
             $table->text("deskripsi");
             $table->timestamps();

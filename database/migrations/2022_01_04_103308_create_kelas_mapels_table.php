@@ -15,8 +15,10 @@ class CreateKelasMapelsTable extends Migration
     {
         Schema::create('kelas_mapels', function (Blueprint $table) {
             $table->id();
-            $table->string("id_kelas")->references("id")->on("kelas")->onDelete("cascade");
-            $table->string("id_mapel")->references("id")->on("mapels")->onDelete("cascade");
+            $table->unsignedBigInteger("id_kelas");
+            $table->foreign("id_kelas")->references('id')->on('kelas')->onDelete("cascade");
+            $table->unsignedBigInteger("id_mapel");
+            $table->foreign("id_mapel")->references('id')->on('mapels')->onDelete("cascade");
             $table->timestamps();
         });
     }

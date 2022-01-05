@@ -15,7 +15,8 @@ class CreateBabsTable extends Migration
     {
         Schema::create('babs', function (Blueprint $table) {
             $table->id();
-            $table->string("id_mapel")->references("id")->on("mapels")->onDelete("cascade");
+            $table->unsignedBigInteger("id_mapel");
+            $table->foreign("id_mapel")->references('id')->on('mapels')->onDelete("cascade");
             $table->string("nama");
             $table->string("deskripsi");
             $table->timestamps();
