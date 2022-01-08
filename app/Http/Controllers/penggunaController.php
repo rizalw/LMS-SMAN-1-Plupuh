@@ -14,6 +14,8 @@ use App\Models\tugas;
 use Carbon\Carbon;
 use PDO;
 
+use function PHPSTORM_META\map;
+
 class penggunaController extends Controller
 {
     public function login()
@@ -51,7 +53,8 @@ class penggunaController extends Controller
             if ($role == "admin") {
                 $data_pengguna = pengguna::all();
                 $data_kelas = kelas::all();
-                return view("contents.admin_page", ['user' => $data_user[0], 'pengguna' => $data_pengguna, 'kelas' => $data_kelas]);
+                $data_mapel = mapel::all();
+                return view("contents.admin_page", ['user' => $data_user[0], 'pengguna' => $data_pengguna, 'kelas' => $data_kelas, 'mapel' => $data_mapel]);
             } elseif ($role == "siswa") {
                 $daftar_tugas = tugas::all();
                 $nama = $data_user[0]->Nama;
@@ -86,6 +89,28 @@ class penggunaController extends Controller
         $mapel->save();
         return redirect('/home');
     }
+    public function updateMapel($id)
+    {
+        $mapel = mapel::find($id);
+        return view('contents.updateMapel', ['mapel' => $mapel]);
+    }
+    public function updateMapelFinal(Request $request)
+    {
+        $nama_mapel = $request->nama_mapel;
+        $deskripsi = $request->deskripsi;
+        $mapel =  mapel::find($request->id);
+        $mapel->nama = $nama_mapel;
+        $mapel->deskripsi = $deskripsi;
+        $mapel->save();
+        return redirect('/home');
+    }
+    public function deleteMapel($id)
+    {
+        $mapel = mapel::find($id);
+        $mapel->delete();
+        return redirect('/home');
+    }
+
     public function createBab($id)
     {
         $mapel = mapel::find($id);
@@ -118,11 +143,13 @@ class penggunaController extends Controller
         $kelas->save();
         return redirect('/home');
     }
-    public function updateKelas($id){
+    public function updateKelas($id)
+    {
         $kelas = kelas::find($id);
         return view('contents.updateKelas', ['kelas' => $kelas]);
     }
-    public function updateKelasFinal(Request $request){
+    public function updateKelasFinal(Request $request)
+    {
         $nama_kelas = $request->nama;
         $tahun_ajaran = $request->tahun_ajaran;
         $kelas = kelas::find($request->id);
@@ -131,7 +158,8 @@ class penggunaController extends Controller
         $kelas->save();
         return redirect('/home');
     }
-    public function deleteKelas($id){
+    public function deleteKelas($id)
+    {
         $kelas = kelas::find($id);
         $kelas->delete();
         return redirect('/home');
@@ -141,12 +169,6 @@ class penggunaController extends Controller
         $daftar_mapel = mapel::all();
         return view("contents.assignMapel", ['daftar_mapel' => $daftar_mapel]);
     }
-    public function assignMapelProcess($id)
-    {
-        $data_mapel  = mapel::find($id);
-        $daftar_kelas = kelas::all();
-        return view("contents.assignMapelProcess", ['daftar_kelas' => $daftar_kelas, 'data_mapel' => $data_mapel]);
-    }
     public function assignMapelFinal(Request $request)
     {
         $id_kelas = $request->id_kelas;
@@ -155,22 +177,11 @@ class penggunaController extends Controller
         $kelas_mapel->id_kelas = $id_kelas;
         $kelas_mapel->id_mapel = $id_mapel;
         $kelas_mapel->save();
-        return redirect("/assignMapel");
-    }
-    public function assignSiswa()
-    {
-        $daftar_siswa = pengguna::where('role', "siswa")->get();
-        return view("contents.assignSiswa", ['daftar_siswa' => $daftar_siswa]);
-    }
-    public function assignSiswaProcess($id)
-    {
-        $data_siswa = pengguna::find($id);
-        $daftar_kelas = kelas::all();
-        return view('contents.assignSiswaProcess', ['daftar_kelas' => $daftar_kelas, 'data_siswa' => $data_siswa]);
+        return redirect("/home");
     }
     public function assignSiswaFinal(Request $request)
     {
-        $id_siswa = $request->siswa;
+        $id_siswa = $request->id_siswa;
         $id_kelas = $request->id_kelas;
         $siswa = pengguna::find($id_siswa);
         $siswa->id_kelas = $id_kelas;
@@ -312,11 +323,13 @@ class penggunaController extends Controller
         $pengguna->save();
         return redirect('/home');
     }
-    public function updatePengguna($id){
+    public function updatePengguna($id)
+    {
         $pengguna = pengguna::find($id);
         return view("contents.updatePengguna", ['pengguna' => $pengguna]);
     }
-    public function updatePenggunaFinal(Request $request){
+    public function updatePenggunaFinal(Request $request)
+    {
         $id = $request->id;
         $nama = $request->nama;
         $email = $request->email;
@@ -329,7 +342,6 @@ class penggunaController extends Controller
         $pengguna->role = $role;
         $pengguna->save();
         return redirect('/home');
-
     }
     public function deletePengguna($id)
     {

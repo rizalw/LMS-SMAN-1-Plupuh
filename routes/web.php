@@ -29,8 +29,6 @@ Route::post('/login', [penggunaController::class, 'loginQuery'])->name('loginQue
 Route::get('/logout', [penggunaController::class, 'logout'])->name('logout');
 Route::get('/home', [penggunaController::class, 'home'])->name('home');
 
-Route::get('/insertMapel', [penggunaController::class, 'createMapel'])->name('create mapel');
-Route::post('/insertMapel', [penggunaController::class, 'uploadMapel'])->name('upload mapel');
 
 Route::get('/insertBab/{id}', [penggunaController::class, 'createBab'])->name('create bab');
 Route::post('/insertBab', [penggunaController::class, 'uploadBab'])->name('upload bab');
@@ -41,12 +39,14 @@ Route::get('/deleteKelas/{id}', [penggunaController::class, 'deleteKelas'])->nam
 Route::get('/updateKelas/{id}', [penggunaController::class, 'updateKelas'])->name('update kelas');
 Route::post('/updateKelas', [penggunaController::class, 'updateKelasFinal'])->name('update kelas final');
 
-Route::get('/assignMapel', [penggunaController::class, 'assignMapel'])->name('assign mapel');
-Route::get('/assignMapel/{id}', [penggunaController::class, 'assignMapelProcess'])->name('assign mapel process');
+Route::get('/insertMapel', [penggunaController::class, 'createMapel'])->name('create mapel');
+Route::post('/insertMapel', [penggunaController::class, 'uploadMapel'])->name('upload mapel');
+Route::get('/updateMapel/{id}', [penggunaController::class, 'updateMapel'])->name('update mapel');
+Route::post('/updateMapel', [penggunaController::class, 'updateMapelFinal'])->name('update mapel final');
+Route::get('/deletemapel/{id}', [penggunaController::class, 'deleteMapel'])->name('delete mapel');
+Route::get('/assignMapel/{id}', [penggunaController::class, 'assignMapelProcess'])->name('assign mapel');
 Route::post('/assignMapel', [penggunaController::class, 'assignMapelFinal'])->name('assign mapel final');
 
-Route::get('/assignSiswa', [penggunaController::class, 'assignSiswa'])->name('assign siswa');
-Route::get('/assignSiswa/{id}', [penggunaController::class, 'assignSiswaProcess'])->name('assign siswa process');
 Route::post('/assignSiswa', [penggunaController::class, 'assignSiswaFinal'])->name('assign siswa final');
 
 Route::get('/createTugas/{id}', [penggunaController::class, 'createTugas'])->name('create tugas');

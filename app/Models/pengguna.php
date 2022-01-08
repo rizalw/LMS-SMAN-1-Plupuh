@@ -18,6 +18,10 @@ class pengguna extends Model
     return $this->belongsTo(kelas::class, "id_kelas");
   }
 
+  public function mapel(){
+    return $this->hasMany(mapel::class, "id_guru");
+  }
+
   public function tugas()
   {
     return $this->belongsToMany(tugas::class, "siswa_tugas", "id_siswa", "id_tugas");
