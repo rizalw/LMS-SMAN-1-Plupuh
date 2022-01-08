@@ -41,3 +41,6 @@ Route::post('/tugas/submit', [penggunaController::class, 'submitTugas'])->name('
 Route::get('/cekTugas/{id}', [penggunaController::class, 'cekTugas'])->name('cek tugas');
 Route::get('/downloadTugas/{id}', [penggunaController::class, 'downloadTugas'])->name('download tugas');
 Route::post('/nilaiTugas', [penggunaController::class, 'nilaiTugas'])->name('nilai tugas');
+Route::get('/createMateri/{id}', [penggunaController::class, 'createMateri'])->name('create materi');
+Route::post('/createMateri', [penggunaController::class, 'uploadMateri'])->name('upload materi');
+Route::get('/lihatMateri/{id}', [penggunaController::class, 'lihatMateri'])->name('lihat materi');

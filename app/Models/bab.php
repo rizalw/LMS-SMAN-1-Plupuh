@@ -18,6 +18,11 @@ class bab extends Model
         return $this->hasMany(tugas::class, "id_bab");
     }
 
+    public function materis()
+    {
+        return $this->hasMany(materi::class, "id_bab");
+    }
+
     public function mapels()
     {
         return $this->belongsTo(mapel::class, 'id_mapel');

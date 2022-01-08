@@ -8,11 +8,11 @@ use App\Models\mapel;
 use App\Models\bab;
 use App\Models\kelas;
 use App\Models\kelas_mapel;
+use App\Models\materi;
 use App\Models\siswa_tugas;
 use App\Models\tugas;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use PhpParser\Node\Expr\FuncCall;
+use PDO;
 
 class penggunaController extends Controller
 {
@@ -58,7 +58,8 @@ class penggunaController extends Controller
                 $daftar_mapel = mapel::where('id_guru', $data_user[0]->id)->get();
                 $daftar_bab = bab::all();
                 $daftar_tugas = tugas::all();
-                return view("contents.guru_page", ['user' => $data_user[0], 'mapel' => $daftar_mapel, 'bab' => $daftar_bab, 'daftar_tugas' => $daftar_tugas]);
+                $daftar_materi = materi::all();
+                return view("contents.guru_page", ['user' => $data_user[0], 'mapel' => $daftar_mapel, 'bab' => $daftar_bab, 'daftar_tugas' => $daftar_tugas, 'daftar_materi' => $daftar_materi]);
             }
         } else {
             return redirect('/login');
@@ -221,22 +222,55 @@ class penggunaController extends Controller
             return redirect('/home');
         }
     }
-    public function cekTugas($id){
+    public function cekTugas($id)
+    {
         $daftar_submission = siswa_tugas::where('id_tugas', $id)->get();
         return view('contents.tugasSubmission', ['daftar_submission' => $daftar_submission]);
     }
-    public function downloadTugas($id){
+    public function downloadTugas($id)
+    {
         $tugas = siswa_tugas::find($id);
         $nama_file = $tugas->file_upload;
         $filepath = public_path('uploaded/' . $nama_file);
         return Response()->download($filepath);
     }
-    public function nilaiTugas(Request $request){
+    public function nilaiTugas(Request $request)
+    {
         $id_submission = $request->id_submission;
         $nilai = $request->nilai;
         $submission = siswa_tugas::find($id_submission);
         $submission->nilai = $nilai;
         $submission->save();
         return redirect('/home');
+    }
+    public function createMateri($id)
+    {
+        $detail_bab = bab::find($id);
+        return view("contents.createMateri", ['detail_bab' => $detail_bab]);
+    }
+    public function uploadMateri(Request $request)
+    {
+        if ($files = $request->file('file')) {
+            $file = $request->file('file');
+            $lokasi = 'uploaded/materi/';
+            $nama_file = $files->getClientOriginalName();
+            $pathMateri = $file->storeAs('materi', $nama_file);
+            $files->move($lokasi, $nama_file);
+            $materi = new materi();
+            $materi->id_bab = $request->id_bab;
+            $materi->nama = $request->nama;
+            $materi->deskripsi = $request->deskripsi;
+            $materi->file_upload = $pathMateri;
+            $materi->save();
+            return redirect('/home');
+        } else {
+            return redirect('/home');
+        }
+    }
+    public function lihatMateri($id){
+        $materi = materi::find($id);
+        $nama_file = $materi->file_upload;
+        $filepath = public_path('uploaded/' . $nama_file);
+        return Response()->download($filepath);
     }
 }

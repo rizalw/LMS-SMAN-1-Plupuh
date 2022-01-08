@@ -16,7 +16,13 @@ ini page buat guru<br>
                     </a>
                 @endif
             @endforeach
-            Click <a href="{{ route('create tugas', ['id' => $b-> id ]) }}">here</a> to create tugas for this bab
+            Click <a href="{{ route('create tugas', ['id' => $b-> id ]) }}">here</a> to create tugas for this bab<br><br>
+            @foreach($daftar_materi as $materi)
+                @if($materi->id_bab == $b->id)
+                    <a href="{{ route('lihat materi', ['id' => $materi-> id ]) }}">{{ $materi->nama }}</a><br>
+                @endif
+            @endforeach
+            Click <a href="{{ route('create materi', ['id' => $b-> id ]) }}">here</a> to create materi for this bab
         @endif
     @endforeach<br><br>
 Click <a href="{{ route('create bab', ['id' => $m-> id ]) }}">here</a> to create new bab
