@@ -15,13 +15,6 @@
 
     <title>Dashboard Siswa</title>
 
-    <style>
-        .kotak {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-        }
-    </style> 
 </head>
 
 <body style="background-color: #EEEFFA; ">
@@ -52,9 +45,65 @@
     </nav>
 
     <!-- Content -->
-    <div class="container mt-5 align-items-center">
-        <div class="kotak" style="background-color: royalblue; z-index: 1; border-radius: 10px;"></div>
-        <div class="kotak" style="background-color: red; margin-top: 100px;"></div>
+    <div class="container-fluid w-100" style="padding: 2% 8%;">
+        <div class="w-100"
+            style="border-radius: 10px; height: 15rem; position: relative; z-index: 1; background-color: #004267;">
+
+        </div>
+        <div class="bg-white w-100 d-flex justify-content-between px-5 pb-3"
+            style="border-radius: 10px; margin-top: -5rem; position: relative;">
+            <div class="d-flex">
+                <div
+                    style="height: 10rem; width: 10rem; background-color: gray; border: solid 2px white; border-radius: 50%; background-image: url(../img/rafi.jpg); background-repeat: no-repeat; background-position :center; background-size: cover; position: relative; z-index: 1000;">
+                </div>
+                <div style="padding-top: 7rem;" class="ms-3">
+                    <h3 class="m-0">Rahma Arbiananda</h3>
+                    <p class="fw-bold"> XII IPA 1</p>
+                </div>
+            </div>
+            <button class="btn text-white"
+                style="height: 3rem; width: 6rem; margin-top: 7rem; background-color: #004267;">Edit</button>
+        </div>
+    </div>
+
+    <div class="container-fluid w-100 mb-5" style="padding: 2% 8%;">
+        <div class="bg-white p-3" style="border-radius: 10px;">
+            <h3>Course</h3>
+            <div class="row">
+                <!-- Mulai looping dari col -->
+                <div class="col-4 px-5 py-3">
+                    <div style="background-color: #EEEFFA; height: 10rem;">
+                        <div style="background-color: orange; height: 5rem; position: relative;">
+                            <p class="fw-bold" style="position: relative; top: 3em; left: 1em;">Matematika Wajib</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 px-5 py-3">
+                    <div style="background-color: #EEEFFA; height: 10rem;">
+                        <div style="background-color: orange; height: 5rem; position: relative;">
+                            <p class="fw-bold" style="position: relative; top: 3em; left: 1em;">Matematika Wajib</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 px-5 py-3">
+                    <div style="background-color: #EEEFFA; height: 10rem;">
+                        <div style="background-color: orange; height: 5rem; position: relative;">
+                            <p class="fw-bold" style="position: relative; top: 3em; left: 1em;">Matematika Wajib</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 px-5 py-3">
+                    <div style="background-color: #EEEFFA; height: 10rem;">
+                        <div style="background-color: orange; height: 5rem; position: relative;">
+                            <p class="fw-bold" style="position: relative; top: 3em; left: 1em;">Matematika Wajib</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -66,41 +115,42 @@
     </div> -->
 
     <!-- Footer -->
-    <footer style="background-color: #004267;" class="fixed-bottom">
-        <div class="row">
+    <footer style="background-color: #004267;" class="w-100">
+        <div>
+            <div class="row w-100">
+                <div class="col-5">
+                    <div class="d-flex flex-column bd-highlight mb-3" style="color: white !important;">
+                        <div class="bd-highlight">Contact Us:</div>
 
-            <div class="col-5">
-                <div class="d-flex flex-column bd-highlight mb-3" style="color: white !important;">
-                    <div class="bd-highlight">Contact Us:</div>
+                        <div class="bd-highlight">
+                            <p>Jalan Sambirejo - Plupuh, Sragen Desa Sambirejo, Kecamatan Plupuh, Kabupaten Sragen, Jawa
+                                Tengah, 57283 </p>
+                        </div>
 
-                    <div class="bd-highlight">
-                        <p>Jalan Sambirejo - Plupuh, Sragen Desa Sambirejo, Kecamatan Plupuh, Kabupaten Sragen, Jawa
-                            Tengah, 57283 </p>
-                    </div>
+                        <div class="bd-highlight">
+                            <p><i class="far fa-envelope"></i> smansaplupuh@gmail.com</p>
+                        </div>
 
-                    <div class="bd-highlight">
-                        <p><i class="far fa-envelope"></i> smansaplupuh@gmail.com</p>
-                    </div>
-
-                    <div class="bd-highlight">
-                        <p><i class="fas fa-phone-alt"></i> 02718854315</p>
+                        <div class="bd-highlight">
+                            <p><i class="fas fa-phone-alt"></i> 02718854315</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-2 d-flex align-items-center">
-                <img src="../img/logo sekolah.png" alt="" class="mx-auto d-block" width="110">
-            </div>
+                <div class="col-2 d-flex align-items-center">
+                    <img src="../img/logo sekolah.png" alt="" class="mx-auto d-block" width="110">
+                </div>
 
-            <div class="col-5">
-                <ul class="nav col-md-10 justify-content-end" style="color: white !important;">
-                    <div class="p-2 bd-highlight">Follow Us:</div>
-                    <div class="p-2 bd-highlight">
-                        <i class="fab fa-instagram" style="font-size: 30px;"></i>
-                        <i class="fab fa-facebook-square" style="font-size: 30px;"></i>
-                    </div>
-                    <!-- <li class="nav-item"><a href="#" class="nav-link px-2" style="color: white !important;">Home</a></li> -->
-                </ul>
+                <div class="col-5">
+                    <ul class="nav col-md-10 justify-content-end" style="color: white !important;">
+                        <div class="p-2 bd-highlight">Follow Us:</div>
+                        <div class="p-2 bd-highlight">
+                            <i class="fab fa-instagram" style="font-size: 30px;"></i>
+                            <i class="fab fa-facebook-square" style="font-size: 30px;"></i>
+                        </div>
+                        <!-- <li class="nav-item"><a href="#" class="nav-link px-2" style="color: white !important;">Home</a></li> -->
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>
