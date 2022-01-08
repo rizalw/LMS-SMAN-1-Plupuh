@@ -44,3 +44,8 @@ Route::post('/nilaiTugas', [penggunaController::class, 'nilaiTugas'])->name('nil
 Route::get('/createMateri/{id}', [penggunaController::class, 'createMateri'])->name('create materi');
 Route::post('/createMateri', [penggunaController::class, 'uploadMateri'])->name('upload materi');
 Route::get('/lihatMateri/{id}', [penggunaController::class, 'lihatMateri'])->name('lihat materi');
+Route::get('/updatePengguna/{id}', [penggunaController::class, 'updatePengguna'])->name('update pengguna');
+Route::post('/updatePengguna', [penggunaController::class, 'updatePenggunaFinal'])->name('update pengguna final');
+Route::get('/deletePengguna/{id}', [penggunaController::class, 'deletePengguna'])->name('delete pengguna');
+Route::get('/createPengguna', [penggunaController::class, 'createPengguna'])->name('create pengguna');
+Route::post('/createPengguna', [penggunaController::class, 'registerPengguna'])->name('register pengguna');

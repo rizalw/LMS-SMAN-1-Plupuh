@@ -49,7 +49,9 @@ class penggunaController extends Controller
             $data_user = pengguna::where('email', $email)->get();
             $role = $data_user[0]->role;
             if ($role == "admin") {
-                return view("contents.admin_page", ['user' => $data_user[0]]);
+                $data_pengguna = pengguna::all();
+                $data_kelas = kelas::all();
+                return view("contents.admin_page", ['user' => $data_user[0], 'pengguna' => $data_pengguna, 'kelas' => $data_kelas]);
             } elseif ($role == "siswa") {
                 $daftar_tugas = tugas::all();
                 $nama = $data_user[0]->Nama;
@@ -267,10 +269,54 @@ class penggunaController extends Controller
             return redirect('/home');
         }
     }
-    public function lihatMateri($id){
+    public function lihatMateri($id)
+    {
         $materi = materi::find($id);
         $nama_file = $materi->file_upload;
         $filepath = public_path('uploaded/' . $nama_file);
         return Response()->download($filepath);
+    }
+    public function createPengguna()
+    {
+        return view('contents.createPengguna');
+    }
+    public function registerPengguna(Request $request)
+    {
+        $nama = $request->nama;
+        $email = $request->email;
+        $password = $request->password;
+        $role = $request->role;
+        $pengguna = new pengguna();
+        $pengguna->Nama = $nama;
+        $pengguna->email = $email;
+        $pengguna->password = $password;
+        $pengguna->role = $role;
+        $pengguna->save();
+        return redirect('/home');
+    }
+    public function updatePengguna($id){
+        $pengguna = pengguna::find($id);
+        return view("contents.updatePengguna", ['pengguna' => $pengguna]);
+    }
+    public function updatePenggunaFinal(Request $request){
+        $id = $request->id;
+        $nama = $request->nama;
+        $email = $request->email;
+        $password = $request->password;
+        $role = $request->role;
+        $pengguna = pengguna::find($id);
+        $pengguna->Nama = $nama;
+        $pengguna->email = $email;
+        $pengguna->password = $password;
+        $pengguna->role = $role;
+        $pengguna->save();
+        return redirect('/home');
+
+    }
+    public function deletePengguna($id)
+    {
+        $pengguna = pengguna::find($id);
+        $pengguna->delete();
+        return redirect('/home');
     }
 }
