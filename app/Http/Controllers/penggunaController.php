@@ -116,7 +116,25 @@ class penggunaController extends Controller
         $kelas->nama_kelas = $nama_kelas;
         $kelas->tahun_ajaran = $tahun_ajaran;
         $kelas->save();
-        return redirect('/createKelas');
+        return redirect('/home');
+    }
+    public function updateKelas($id){
+        $kelas = kelas::find($id);
+        return view('contents.updateKelas', ['kelas' => $kelas]);
+    }
+    public function updateKelasFinal(Request $request){
+        $nama_kelas = $request->nama;
+        $tahun_ajaran = $request->tahun_ajaran;
+        $kelas = kelas::find($request->id);
+        $kelas->nama_kelas = $nama_kelas;
+        $kelas->tahun_ajaran = $tahun_ajaran;
+        $kelas->save();
+        return redirect('/home');
+    }
+    public function deleteKelas($id){
+        $kelas = kelas::find($id);
+        $kelas->delete();
+        return redirect('/home');
     }
     public function assignMapel()
     {

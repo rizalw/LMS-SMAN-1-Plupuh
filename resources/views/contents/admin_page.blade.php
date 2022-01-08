@@ -13,52 +13,86 @@
 <body>
     <div class="display-5 text-center py-5">Welcome to Admin Page</div>
     <div class="container">
-        <div class="fs-2 mb-2">Tabel Pengguna</div>
-        <table class="table table-striped">
-            <thead class="text-center">
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Kelas</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $i = 1 ?>
-                @foreach($pengguna as $p)
-                <tr>
-                    <th class="text-center"><?= $i ?></th>
-                    <td class="text-center">{{ $p->id}}</td>
-                    <td>{{ $p->Nama}}</td>
-                    <td>{{ $p->email}}</td>
-                    <?php if (isset($p->kelas->nama_kelas)) : ?>
-                        <td class="text-center">{{ $p->kelas->nama_kelas}}</td>
-                    <?php else : ?>
-                        <td class="text-center">-</td>
-                    <?php endif; ?>
-                    <td class="text-center">{{ $p->role }}</td>
-                    <td class="text-center">
-                        <a href="{{ route('update pengguna', ['id' => $p->id ]) }}">
-                            <button class="btn btn-primary">Update</button>
-                        </a>
-                        <a href="{{ route('delete pengguna', ['id' => $p->id ]) }}">
-                            <button class="btn btn-danger">Delete</button>
-                        </a>
-                    </td>
-                </tr>
-                <?php $i++ ?>
-                @endforeach
-            </tbody>
-        </table>
-        <a href="{{ route('create pengguna') }}">
-            <button class="btn btn-primary">Buat pengguna baru</button>
-        </a>
+        <section id="tabel_pengguna">
+            <div class="fs-2 mb-2">Tabel Pengguna</div>
+            <table class="table table-striped">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Kelas</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i = 1 ?>
+                    @foreach($pengguna as $p)
+                    <tr>
+                        <th class="text-center"><?= $i ?></th>
+                        <td>{{ $p->Nama}}</td>
+                        <td>{{ $p->email}}</td>
+                        <?php if (isset($p->kelas->nama_kelas)) : ?>
+                            <td class="text-center">{{ $p->kelas->nama_kelas}}</td>
+                        <?php else : ?>
+                            <td class="text-center">-</td>
+                        <?php endif; ?>
+                        <td class="text-center">{{ $p->role }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('update pengguna', ['id' => $p->id ]) }}">
+                                <button class="btn btn-primary">Update</button>
+                            </a>
+                            <a href="{{ route('delete pengguna', ['id' => $p->id ]) }}">
+                                <button class="btn btn-danger">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php $i++ ?>
+                    @endforeach
+                </tbody>
+            </table>
+            <a href="{{ route('create pengguna') }}">
+                <button class="btn btn-primary">Buat pengguna baru</button>
+            </a>
+        </section>
+        <section id="tabel_kelas" class="mt-5">
+            <div class="fs-2 mb-2">Tabel Kelas</div>
+            <table class="table table-striped">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Nama Kelas</th>
+                        <th scope="col">Tahun Ajaran</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i = 1 ?>
+                    @foreach($kelas as $k)
+                    <tr>
+                        <th class="text-center"><?= $i ?></th>
+                        <td class="text-center">{{ $k->nama_kelas}}</td>
+                        <td class="text-center">{{ $k->tahun_ajaran}}</td>
+                        <td class="text-center">
+                            <a href="{{ route('update kelas', ['id' => $k->id ]) }}">
+                                <button class="btn btn-primary">Update</button>
+                            </a>
+                            <a href="{{ route('delete kelas', ['id' => $k->id ]) }}">
+                                <button class="btn btn-danger">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php $i++ ?>
+                    @endforeach
+                </tbody>
+            </table>
+            <a href="{{ route('create kelas') }}">
+                <button class="btn btn-primary">Buat Kelas baru</button>
+            </a>
+        </section>
     </div>
     Click <a href="{{ route('create mapel') }}">here </a>to insert new mapel<br>
-    Click <a href="{{ route('create kelas') }}">here </a>to create new kelas<br>
     Click <a href="{{ route('assign mapel') }}">here </a>to assign mapel to kelas<br>
     Click <a href="{{ route('assign siswa') }}">here </a>to assign siswa to kelas<br>
     <a href="{{route('logout')}}">Logout</a><br>

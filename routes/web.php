@@ -17,35 +17,48 @@ use App\Http\Controllers\penggunaController;
 Route::get('/', function () {
     return view('contents.welcome');
 });
+
+Route::get('/createPengguna', [penggunaController::class, 'createPengguna'])->name('create pengguna');
+Route::post('/createPengguna', [penggunaController::class, 'registerPengguna'])->name('register pengguna');
+Route::get('/updatePengguna/{id}', [penggunaController::class, 'updatePengguna'])->name('update pengguna');
+Route::post('/updatePengguna', [penggunaController::class, 'updatePenggunaFinal'])->name('update pengguna final');
+Route::get('/deletePengguna/{id}', [penggunaController::class, 'deletePengguna'])->name('delete pengguna');
+
 Route::get('/login', [penggunaController::class, 'login'])->name('login');
 Route::post('/login', [penggunaController::class, 'loginQuery'])->name('loginQuery');
 Route::get('/logout', [penggunaController::class, 'logout'])->name('logout');
 Route::get('/home', [penggunaController::class, 'home'])->name('home');
+
 Route::get('/insertMapel', [penggunaController::class, 'createMapel'])->name('create mapel');
 Route::post('/insertMapel', [penggunaController::class, 'uploadMapel'])->name('upload mapel');
+
 Route::get('/insertBab/{id}', [penggunaController::class, 'createBab'])->name('create bab');
 Route::post('/insertBab', [penggunaController::class, 'uploadBab'])->name('upload bab');
+
 Route::get('/createKelas', [penggunaController::class, 'createKelas'])->name('create kelas');
 Route::post('/createKelas', [penggunaController::class, 'uploadKelas'])->name('upload kelas');
+Route::get('/deleteKelas/{id}', [penggunaController::class, 'deleteKelas'])->name('delete kelas');
+Route::get('/updateKelas/{id}', [penggunaController::class, 'updateKelas'])->name('update kelas');
+Route::post('/updateKelas', [penggunaController::class, 'updateKelasFinal'])->name('update kelas final');
+
 Route::get('/assignMapel', [penggunaController::class, 'assignMapel'])->name('assign mapel');
 Route::get('/assignMapel/{id}', [penggunaController::class, 'assignMapelProcess'])->name('assign mapel process');
 Route::post('/assignMapel', [penggunaController::class, 'assignMapelFinal'])->name('assign mapel final');
+
 Route::get('/assignSiswa', [penggunaController::class, 'assignSiswa'])->name('assign siswa');
 Route::get('/assignSiswa/{id}', [penggunaController::class, 'assignSiswaProcess'])->name('assign siswa process');
 Route::post('/assignSiswa', [penggunaController::class, 'assignSiswaFinal'])->name('assign siswa final');
+
 Route::get('/createTugas/{id}', [penggunaController::class, 'createTugas'])->name('create tugas');
 Route::post('/createTugas', [penggunaController::class, 'createTugasFinal'])->name('create tugas final');
+
 Route::get('/tugas/{id}', [penggunaController::class, 'menuTugas'])->name('menu tugas');
 Route::get('/tugas/submit/{id}', [penggunaController::class, 'menuTugasProcess'])->name('menu tugas process');
 Route::post('/tugas/submit', [penggunaController::class, 'submitTugas'])->name('submit tugas');
 Route::get('/cekTugas/{id}', [penggunaController::class, 'cekTugas'])->name('cek tugas');
 Route::get('/downloadTugas/{id}', [penggunaController::class, 'downloadTugas'])->name('download tugas');
 Route::post('/nilaiTugas', [penggunaController::class, 'nilaiTugas'])->name('nilai tugas');
+
 Route::get('/createMateri/{id}', [penggunaController::class, 'createMateri'])->name('create materi');
 Route::post('/createMateri', [penggunaController::class, 'uploadMateri'])->name('upload materi');
 Route::get('/lihatMateri/{id}', [penggunaController::class, 'lihatMateri'])->name('lihat materi');
-Route::get('/updatePengguna/{id}', [penggunaController::class, 'updatePengguna'])->name('update pengguna');
-Route::post('/updatePengguna', [penggunaController::class, 'updatePenggunaFinal'])->name('update pengguna final');
-Route::get('/deletePengguna/{id}', [penggunaController::class, 'deletePengguna'])->name('delete pengguna');
-Route::get('/createPengguna', [penggunaController::class, 'createPengguna'])->name('create pengguna');
-Route::post('/createPengguna', [penggunaController::class, 'registerPengguna'])->name('register pengguna');
