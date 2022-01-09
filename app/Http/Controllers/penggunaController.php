@@ -387,6 +387,14 @@ class penggunaController extends Controller
         $submission->save();
         return redirect('/home');
     }
+    public function updateDeskripsi(Request $request){
+        $id_mapel = $request->id_mapel;
+        $deskripsi = $request->deskripsi;
+        $mapel = mapel::find($id_mapel);
+        $mapel->deskripsi = $deskripsi;
+        $mapel->save();
+        return redirect('/home');
+    }
     public function createMateri($id)
     {
         if (session()->exists('is_login')) {

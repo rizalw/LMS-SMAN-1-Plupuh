@@ -52,6 +52,7 @@ Route::post('/updateMapel', [penggunaController::class, 'updateMapelFinal'])->na
 Route::get('/deletemapel/{id}', [penggunaController::class, 'deleteMapel'])->name('delete mapel');
 Route::get('/assignMapel/{id}', [penggunaController::class, 'assignMapelProcess'])->name('assign mapel');
 Route::post('/assignMapel', [penggunaController::class, 'assignMapelFinal'])->name('assign mapel final');
+Route::post('/updateDeskripsi', [penggunaController::class, 'updateDeskripsi'])->name('update deskripsi');
 
 Route::post('/assignSiswa', [penggunaController::class, 'assignSiswaFinal'])->name('assign siswa final');
 

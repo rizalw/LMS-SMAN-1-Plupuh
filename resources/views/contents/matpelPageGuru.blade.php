@@ -11,8 +11,38 @@
     <p class="mx-2" style="color: #13638F;"><a href="/home" style="color: black; text-decoration:none;">Dashboard</a> / <a href="/home" style="color: black; text-decoration:none;">Course</a> / {{ $mapel->nama }}</p>
 
     <div class="container py-2" style="background-color: white;">
-        <h5 style="color: #13638F;">Deskripsi Mata Pelajaran {{ $mapel->nama }}</h5>
-        <p style="color: #13638F;" class="mx-2">{{ $mapel->deskripsi }}</p>
+        <div class="row">
+            <div class="col-10">
+                <h5 style="color: #13638F;">Deskripsi Mata Pelajaran {{ $mapel->nama }}</h5>
+                <p style="color: #13638F;" class="mx-2">{{ $mapel->deskripsi }}</p>
+            </div>
+            <div class="col-2">
+                <a href="#" style="color: black; text-decoration:none;" data-bs-toggle="modal" data-bs-target="#modalDeskripsi" >Update Deskripsi</a>
+            </div>
+        </div>
+        <!-- Modal Deskripsi -->
+        <div class="modal fade" id="modalDeskripsi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Materi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('update deskripsi') }}" method="post">
+                        <div class="modal-body">
+                            @csrf
+                            <input type="number" name="id_mapel" id="" value="{{ $mapel->id }}" class="form-control" hidden>
+                            <label for="" class="form-text">Deskripsi Mata Pelajaran</label><br>
+                            <textarea name="deskripsi" id="" cols="30" rows="10" class="form-control">{{ $mapel->deskripsi}}</textarea><br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" value="Update Deskripsi" class="btn btn-primary mt-2">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     @foreach($daftar_bab as $bab)
     <div class="container pt-2 pb-3 mt-4" style="background-color: white;">
@@ -114,7 +144,7 @@
             </div>
             <div class="col-2 d-flex justify-content-around">
                 <a href="{{ route('update bab', ['id'=> $bab->id]) }}" style="color: black; text-decoration:none;">Update Bab</a>
-                <a href="{{ route('delete bab', ['id'=> $bab->id]) }}" style="color: black; text-decoration:none;">Delete Bab</a>
+                <a href="{{ route('delete bab', ['id'=> $bab->id]) }}" style="color: red; text-decoration:none;">Delete Bab</a>
             </div>
         </div>
     </div>
