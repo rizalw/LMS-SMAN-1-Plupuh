@@ -10,7 +10,6 @@
     }
 </style>
 
-<!-- <body style="background-color: #C2E8F9; "> -->
 @section("main")
 <!-- Content -->
 <div style="background-color: #C2E8F9; ">
@@ -27,7 +26,7 @@
                                 <p class="m-0" style="color: #13638F;">{{ $data_siswa->kelas->tahun_ajaran}}</p>
                             </div>
                             <div class="col-3">
-                                <a href="">
+                                <a href="{{ route('lihat mapel', ['id' => $mapel->id]) }}">
                                     <p class="m-0" style="color: #004267;">{{ $mapel->nama}}</p>
                                 </a>
                             </div>
@@ -47,7 +46,7 @@
             <div class="bg-light p-2 mb-3">
                 <div style="color: #13638F;" class="mt-1 d-flex mb-3">
                     <img src="images/Task Planning.png" alt="" style="height: 1.5em;">
-                    <a href="">
+                    <a href="{{ route('menu tugas', ['id' => $tugas -> id ]) }}">
                         <p class="m-0 ms-3">Pengumpulan {{ $tugas->nama}} </p>
                     </a>
                 </div>

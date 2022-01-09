@@ -12,9 +12,7 @@ use App\Models\materi;
 use App\Models\siswa_tugas;
 use App\Models\tugas;
 use Carbon\Carbon;
-use PDO;
 
-use function PHPSTORM_META\map;
 
 class penggunaController extends Controller
 {
@@ -30,6 +28,9 @@ class penggunaController extends Controller
         $boolPassword = pengguna::where('password', $password)->exists();
         $status = $boolEmail && $boolPassword;
         if ($status) {
+            $pengguna = pengguna::where('email', $email)->get();
+            session(['id' => $pengguna[0]->id]);
+            session(['nama' => $pengguna[0]->Nama]);
             session(['email' => $email]);
             session(['is_login' => "True"]);
             return redirect('/home');
@@ -69,6 +70,14 @@ class penggunaController extends Controller
         } else {
             return redirect('/login');
         }
+    }
+
+    public function lihatMapel($id){
+        $mapel = mapel::find($id);
+        $daftar_materi = materi::all();
+        $daftar_tugas = tugas::all();
+        $daftar_bab = bab::where('id_mapel', $id)->get();
+        return view('contents.matpelPage', ['mapel' => $mapel, 'daftar_bab' => $daftar_bab, 'daftar_materi' => $daftar_materi, 'daftar_tugas' => $daftar_tugas]);
     }
     public function createMapel()
     {
@@ -225,7 +234,7 @@ class penggunaController extends Controller
         } else {
             $status = "Sudah Mengumpulkan";
         }
-        return view('contents.detailTugas', ['tugas' => $tugas, 'remaining' => $remaining, 'status' => $status]);
+        return view('contents.detailTugas', ['tugas' => $tugas, 'remaining' => $remaining, 'status' => $status, 'data_tugas' => $data_tugas ]);
     }
     public function menuTugasProcess($id)
     {
@@ -238,10 +247,10 @@ class penggunaController extends Controller
     public function submitTugas(Request $request)
     {
         if ($files = $request->file('file')) {
-            $file = $request->file('file');
+            $files = $request->file('file');
             $lokasi = 'uploaded/tugas/';
             $nama_file = $files->getClientOriginalName();
-            $pathTugas = $file->storeAs('tugas', $nama_file);
+            $pathTugas = $files->storeAs('tugas', $nama_file);
             $files->move($lokasi, $nama_file);
             $tugas_siswa = new siswa_tugas();
             $tugas_siswa->id_tugas = $request->id_tugas;
@@ -252,6 +261,11 @@ class penggunaController extends Controller
         } else {
             return redirect('/home');
         }
+    }
+    public function hapusTugas($id){
+        $tugas = siswa_tugas::find($id);
+        $tugas->delete();
+        return redirect("/home");
     }
     public function cekTugas($id)
     {

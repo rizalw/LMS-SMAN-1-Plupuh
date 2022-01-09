@@ -15,17 +15,17 @@
 
 </head>
 
-<body>
+<body style="background-color: #C2E8F9;">
 
     <!-- Navbar -->
     <nav class="navbar navbar-custom navbar-expand-lg shadow" style="background-color: #C2E8F9;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="images/logo sma.png" alt="" width="60"></a>
+            <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/logo sma.png') }}" alt="" width="60"></a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item navbar-custom navbar-brand">
-                        <a class="nav-link active" aria-current="page" href="#"><b style="color: #0884CA;">SMANSA</b> <b
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}"><b style="color: #0884CA;">SMANSA</b> <b
                                 style="color: #02659D;">PLUPUH</b></a>
                     </li>
                 </ul>
@@ -33,7 +33,7 @@
                 <div class="d-flex flex-row-reverse bd-highlight align-items-center">
                     <div class=" bd-highlight">
                         <a class="nav-link d-flex fs-5 align-self-center" aria-current="page" href="#">
-                            <b class="p-1 mx-2" style="color: #004267;">Hi, {{ $nama }}</b>
+                            <b class="p-1 mx-2" style="color: #004267;">Hi, {{ session('nama') }}</b>
                             <i class="fas fa-user" id="" style="color: #004267; font-size: 35px;"></i>
                         </a>
                     </div>
@@ -44,7 +44,7 @@
 
     @yield('main')
     <!-- Footer -->
-    <footer style="background-color: #004267;" class="fixed-bottom">
+    <footer style="background-color: #004267;" class="sticky-bottom mt-5">
         <div class="row">
 
             <div class="col-5">
@@ -66,7 +66,7 @@
             </div>
 
             <div class="col-2 d-flex align-items-center">
-                <img src="images/logo sekolah.png" alt="" class="mx-auto d-block" width="110">
+                <img src="{{ asset('images/logo sekolah.png') }}" alt="" class="mx-auto d-block" width="110">
             </div>
 
             <div class="col-5">
