@@ -24,16 +24,18 @@ class penggunaController extends Controller
     {
         $email = $request->email;
         $password = $request->password;
-        $boolEmail = pengguna::where('email', $email)->exists();
-        $boolPassword = pengguna::where('password', $password)->exists();
-        $status = $boolEmail && $boolPassword;
+        $status = pengguna::where('email', $email)->exists();
         if ($status) {
             $pengguna = pengguna::where('email', $email)->get();
-            session(['id' => $pengguna[0]->id]);
-            session(['nama' => $pengguna[0]->Nama]);
-            session(['email' => $email]);
-            session(['is_login' => "True"]);
-            return redirect('/home');
+            if ($pengguna[0]->password == $password) {
+                session(['id' => $pengguna[0]->id]);
+                session(['nama' => $pengguna[0]->Nama]);
+                session(['email' => $email]);
+                session(['is_login' => "True"]);
+                return redirect('/home');
+            } else {
+                return redirect('/login');
+            }
         } else {
             return redirect('/login');
         }
