@@ -178,6 +178,11 @@ class penggunaController extends Controller
         $bab->save();
         return redirect('/home');
     }
+    public function deleteBab($id){
+        $bab = bab::find($id);
+        $bab->delete();
+        return redirect('/home');
+    }
     public function uploadBab(Request $request)
     {
         $id_mapel = $request->id_mapel;

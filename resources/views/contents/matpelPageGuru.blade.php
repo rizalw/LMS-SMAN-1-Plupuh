@@ -17,7 +17,7 @@
     @foreach($daftar_bab as $bab)
     <div class="container pt-2 pb-3 mt-4" style="background-color: white;">
         <div class="row">
-            <div class="col-11">
+            <div class="col-10">
                 <h5 style="color: #13638F;">{{ $bab->nama }}</h5>
 
                 <div style="color: #13638F;" class="mt-1">
@@ -55,8 +55,9 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-1">
+            <div class="col-2 d-flex justify-content-around">
                 <a href="{{ route('update bab', ['id'=> $bab->id]) }}" style="color: black; text-decoration:none;">Update Bab</a>
+                <a href="{{ route('delete bab', ['id'=> $bab->id]) }}" style="color: black; text-decoration:none;">Delete Bab</a>
             </div>
         </div>
     </div>

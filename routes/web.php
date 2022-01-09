@@ -34,6 +34,7 @@ Route::get('/home', [penggunaController::class, 'home'])->name('home');
 Route::get('/insertBab/{id}', [penggunaController::class, 'createBab'])->name('create bab');
 Route::post('/insertBab', [penggunaController::class, 'uploadBab'])->name('upload bab');
 Route::get('/updateBab/{id}', [penggunaController::class, 'updateBab'])->name('update bab');
+Route::get('/deleteBab/{id}', [penggunaController::class, 'deleteBab'])->name('delete bab');
 Route::post('/updateBab', [penggunaController::class, 'updateBabFinal'])->name('update bab final');
 
 Route::get('/createKelas', [penggunaController::class, 'createKelas'])->name('create kelas');
