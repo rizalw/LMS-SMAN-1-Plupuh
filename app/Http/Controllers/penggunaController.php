@@ -93,6 +93,18 @@ class penggunaController extends Controller
             return redirect("/login");
         }
     }
+    public function lihatMapelGuru($id)
+    {
+        if (session()->exists('is_login')) {
+            $mapel = mapel::find($id);
+            $daftar_materi = materi::all();
+            $daftar_tugas = tugas::all();
+            $daftar_bab = bab::where('id_mapel', $id)->get();
+            return view('contents.matpelPageGuru', ['mapel' => $mapel, 'daftar_bab' => $daftar_bab, 'daftar_materi' => $daftar_materi, 'daftar_tugas' => $daftar_tugas]);
+        } else {
+            return redirect("/login");
+        }
+    }
     public function createMapel()
     {
         if (session()->exists('is_login')) {
@@ -154,6 +166,17 @@ class penggunaController extends Controller
         } else {
             return redirect("/login");
         }
+    }
+    public function updateBab($id){
+        $bab = bab::find($id);
+        return view("contents.updateBab", ['bab' => $bab]);
+    }
+    public function updateBabFinal(Request $request){
+        $bab = bab::find($request->id_bab);
+        $bab->nama = $request->nama;
+        $bab->deskripsi = $request->deskripsi;
+        $bab->save();
+        return redirect('/home');
     }
     public function uploadBab(Request $request)
     {

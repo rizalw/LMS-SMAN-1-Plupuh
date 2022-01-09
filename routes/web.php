@@ -33,6 +33,8 @@ Route::get('/home', [penggunaController::class, 'home'])->name('home');
 
 Route::get('/insertBab/{id}', [penggunaController::class, 'createBab'])->name('create bab');
 Route::post('/insertBab', [penggunaController::class, 'uploadBab'])->name('upload bab');
+Route::get('/updateBab/{id}', [penggunaController::class, 'updateBab'])->name('update bab');
+Route::post('/updateBab', [penggunaController::class, 'updateBabFinal'])->name('update bab final');
 
 Route::get('/createKelas', [penggunaController::class, 'createKelas'])->name('create kelas');
 Route::post('/createKelas', [penggunaController::class, 'uploadKelas'])->name('upload kelas');
@@ -42,6 +44,7 @@ Route::post('/updateKelas', [penggunaController::class, 'updateKelasFinal'])->na
 
 Route::get('/insertMapel', [penggunaController::class, 'createMapel'])->name('create mapel');
 Route::get('/lihatMapel/{id}', [penggunaController::class, 'lihatMapel'])->name('lihat mapel');
+Route::get('/lihatMapelGuru/{id}', [penggunaController::class, 'lihatMapelGuru'])->name('lihat mapel guru');
 Route::post('/insertMapel', [penggunaController::class, 'uploadMapel'])->name('upload mapel');
 Route::get('/updateMapel/{id}', [penggunaController::class, 'updateMapel'])->name('update mapel');
 Route::post('/updateMapel', [penggunaController::class, 'updateMapelFinal'])->name('update mapel final');

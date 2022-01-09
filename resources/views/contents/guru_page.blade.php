@@ -1,31 +1,33 @@
-ini page buat guru<br>
+@extends("layout.navbarLogin")
 
-@foreach($mapel as $m)
-    <p>Daftar Mapel</p>
-    <p>{{ $m }}</p>
-    <p>Daftar Bab yang sudah ada<br>
-    @foreach($bab as $b)
-        @if($m->id == $b->id_mapel)
-            <?= $b->nama ?><br>
-            <p>Daftar tugas untuk bab ini</p>
-            @foreach($daftar_tugas as $tugas)
-                @if($tugas->id_bab == $b->id)
-                    {{ $tugas->nama }}<br>
-                    <a href="{{ route('cek tugas', ['id' => $tugas-> id ]) }}">
-                        <p>Cek submission</p>
-                    </a>
-                @endif
-            @endforeach
-            Click <a href="{{ route('create tugas', ['id' => $b-> id ]) }}">here</a> to create tugas for this bab<br><br>
-            @foreach($daftar_materi as $materi)
-                @if($materi->id_bab == $b->id)
-                    <a href="{{ route('lihat materi', ['id' => $materi-> id ]) }}">{{ $materi->nama }}</a><br>
-                @endif
-            @endforeach
-            Click <a href="{{ route('create materi', ['id' => $b-> id ]) }}">here</a> to create materi for this bab
-        @endif
-    @endforeach<br><br>
-Click <a href="{{ route('create bab', ['id' => $m-> id ]) }}">here</a> to create new bab
-@endforeach
-<br>
-<a href="{{route('logout')}}">Logout</a>
+@section("title")
+<title>Dashboard Guru</title>
+@endsection
+
+@section("main")
+<!-- Content -->
+<div class="row" style="min-height: 90vh;">
+    <div class="container w-75 py-3" style="background-color: #EEEFFA; min-height: 100%;">
+        <h3 class="mx-2" style="color: #13638F;">Selamat Datang, {{ session('nama')}}</h3>
+
+        <div class="container" style="background-color: white;">
+            <h4 style="color: #13638F;" class="pt-3">Manage Course</h4>
+            <div class="row">
+                <!-- Mulai looping dari col -->
+                @foreach($mapel as $m)
+                <div class="col-4 px-5 pt-3 pb-4">
+                    <div style="background-color: #EEEFFA; height: 10rem;">
+                        <div style="background-color: orange; height: 5rem; position: relative;">
+                            <p class="fw-bold" style="position: relative; top: 3em; left: 1em;">SMAN 1 PLUPUH TA {{ $m->kelas[0]->tahun_ajaran }}</p>
+                        </div>
+                        <a href="{{ route('lihat mapel guru', ['id' => $m->id ])}}" style="color: black; text-decoration:none">
+                            <p class="fw-bold" style="position: relative; top: 2em; left: 1em;">{{ $m->nama }}</p>
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

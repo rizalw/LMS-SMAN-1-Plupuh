@@ -15,7 +15,7 @@
 
 </head>
 
-<body style="background-color: #C2E8F9;">
+<body style="background-color: #C2E8F9; overflow-x:hidden">
 
     <!-- Navbar -->
     <nav class="navbar navbar-custom navbar-expand-lg shadow" style="background-color: #C2E8F9;">
