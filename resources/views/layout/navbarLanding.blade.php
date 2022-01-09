@@ -45,7 +45,7 @@
     @yield("main")
 
     <!-- Footer -->
-    <footer style="background-color: #004267;" class="fixed-bottom">
+    <footer style="background-color: #004267;" class="sticky-bottom">
         <div class="row">
 
             <div class="col-5">

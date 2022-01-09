@@ -8,7 +8,7 @@
 <!-- Content -->
 <div class="container mb-5" style="background-color: #EEEFFA; min-height: 100vh;">
     <h4 class="mx-2 pt-3" style="color: #13638F;">{{ $mapel->nama}} {{ $mapel->kelas[0]->nama_kelas}}</h4>
-    <p class="mx-2" style="color: #13638F;"><a href="">Dashboard</a> / <a href="">Course</a> / {{ $mapel->nama }}</p>
+    <p class="mx-2" style="color: #13638F;"><a href="/home">Dashboard</a> / <a href="/home">Course</a> / {{ $mapel->nama }}</p>
 
     <div class="container py-2" style="background-color: white;">
         <h5 style="color: #13638F;">Deskripsi Mata Pelajaran {{ $mapel->nama }}</h5>

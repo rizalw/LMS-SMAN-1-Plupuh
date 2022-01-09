@@ -8,7 +8,7 @@
 <!-- Content -->
 <div class="container w-75 m-auto py-3 mb-5" style="background-color: #EEEFFA; min-height: 100%;">
     <h3 class="mx-2" style="color: #13638F;">{{ $tugas->babs->mapels->nama }} {{ $tugas->babs->mapels->kelas[0]->nama_kelas }}</h3>
-    <p class="mx-2" style="color: #13638F;"><a href="">Dashboard</a> / <a href="">Course</a> / <a href="" class="">{{ $tugas->babs->mapels->nama }}</a> / <a href="">{{ $tugas->babs->nama }}</a> / <a href="">
+    <p class="mx-2" style="color: #13638F;"><a href="/home">Dashboard</a> / <a href="/home">Course</a> / <a href="{{ route('lihat mapel', ['id' => $tugas->babs->mapels->id]) }}">{{ $tugas->babs->mapels->nama }}</a> / <a href="">{{ $tugas->babs->nama }}</a> / <a href="">
             {{ $tugas->nama }}</a>
     </p>
     <div class="container" style="background-color: white;">
