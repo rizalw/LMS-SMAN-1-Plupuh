@@ -69,40 +69,13 @@
                             </div>
                         </div>
                         <div class="col-9">
-                            <a href="{{ route('hapus materi', ['id' => $materi->id ]) }}" class="btn btn-danger ">Hapus Materi</a>
+                            <a href="{{ route('hapus materi', ['id' => $materi->id ]) }}" style="color:red;">Hapus Materi</a>
                         </div>
                     </div>
                     <p>{{ $materi->deskripsi}}</p>
                     @endif
                     @endforeach
-                    <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#modalBab" class="btn btn-primary mt-1">Tambah Materi</a>
-                </div>
-                <!-- Modal Materi -->
-                <div class="modal fade" id="modalBab" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Materi</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form action="{{ route('upload materi') }}" method="post" enctype="multipart/form-data">
-                                <div class="modal-body">
-                                    @csrf
-                                    <input type="number" name="id_bab" id="" value="{{ $bab->id }}" class="form-control" hidden>
-                                    <label for="" class="form-text">Nama Materi</label><br>
-                                    <input type="text" name="nama" id="" class="form-control"><br>
-                                    <label for="" class="form-text">Deskripsi Materi</label><br>
-                                    <textarea name="deskripsi" id="" cols="30" rows="10" class="form-control"></textarea><br>
-                                    <label for="" class="form-text">Upload materi</label>
-                                    <input type="file" name="file" id="" class="form-control"><br>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <input type="submit" value="Submit materi" class="btn btn-primary mt-2">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    <a href="{{ route('create materi', ['id' => $bab->id ])}}" style="color:black;">Tambah Materi</a>
                 </div>
                 <!-- Tugas dan Latihan -->
                 <div style="color: #13638F;" class="mt-3">
@@ -119,41 +92,12 @@
                             </div>
                         </div>
                         <div class="col-9">
-                            <a href="{{ route('hapus tugas', ['id' => $tugas-> id ]) }}" class="btn btn-danger ">Hapus tugas</a>
+                            <a href="{{ route('hapus tugas', ['id' => $tugas-> id ]) }}" style="color: red;">Hapus tugas</a>
                         </div>
                     </div>
                     @endif
                     @endforeach
-                    <a href="javascript:void()" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary mt-1">Tambah Tugas</a>
-                </div>
-                <!-- Modal tugas -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Tugas</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form action="{{ route('create tugas final') }}" method="post">
-                                <div class="modal-body">
-                                    @csrf
-                                    <input type="text" name="id_bab" id="" value="{{ $bab->id }}" class="form-control" hidden>
-                                    <label for="" class="form-text">Nama Tugas</label><br>
-                                    <input type="text" name="nama" id="" class="form-control"><br>
-                                    <label for="" class="form-text">Deskripsi Tugas</label><br>
-                                    <textarea name="deskripsi" id="" cols="30" rows="10" class="form-control"></textarea><br>
-                                    <label for="" class="form-text">Tenggat hari</label><br>
-                                    <input type="date" name="tanggal" id="" class="form-control"><br>
-                                    <label for="" class="form-text">Tenggat Waktu</label><br>
-                                    <input type="time" name="waktu" id="" class="form-control"><br>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <input type="submit" value="Buat Tugas" class="btn btn-primary">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                    <a href="{{ route('create tugas', ['id' => $bab->id ])}}" style="color:black;">Tambah Tugas</a>
                 </div>
             </div>
             <div class="col-2 d-flex justify-content-around">
