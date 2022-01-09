@@ -12,15 +12,13 @@ use App\Models\materi;
 use App\Models\siswa_tugas;
 use App\Models\tugas;
 use Carbon\Carbon;
-use PDO;
 
-use function PHPSTORM_META\map;
 
 class penggunaController extends Controller
 {
     public function login()
     {
-        return view("contents.login");
+        return view("contents.welcome");
     }
     public function loginQuery(Request $request)
     {
@@ -30,6 +28,9 @@ class penggunaController extends Controller
         $boolPassword = pengguna::where('password', $password)->exists();
         $status = $boolEmail && $boolPassword;
         if ($status) {
+            $pengguna = pengguna::where('email', $email)->get();
+            session(['id' => $pengguna[0]->id]);
+            session(['nama' => $pengguna[0]->Nama]);
             session(['email' => $email]);
             session(['is_login' => "True"]);
             return redirect('/home');
@@ -70,10 +71,36 @@ class penggunaController extends Controller
             return redirect('/login');
         }
     }
+    public function profile()
+    {
+        if (session()->exists('is_login')) {
+            $id_siswa = session('id');
+            $siswa = pengguna::find($id_siswa);
+            return view('contents.profileSiswa', ['siswa' => $siswa]);
+        } else {
+            return redirect("/login");
+        }
+    }
+    public function lihatMapel($id)
+    {
+        if (session()->exists('is_login')) {
+            $mapel = mapel::find($id);
+            $daftar_materi = materi::all();
+            $daftar_tugas = tugas::all();
+            $daftar_bab = bab::where('id_mapel', $id)->get();
+            return view('contents.matpelPage', ['mapel' => $mapel, 'daftar_bab' => $daftar_bab, 'daftar_materi' => $daftar_materi, 'daftar_tugas' => $daftar_tugas]);
+        } else {
+            return redirect("/login");
+        }
+    }
     public function createMapel()
     {
-        $guru = pengguna::where('role', "guru")->get();
-        return view("contents.insertMapel", ['guru' => $guru]);
+        if (session()->exists('is_login')) {
+            $guru = pengguna::where('role', "guru")->get();
+            return view("contents.insertMapel", ['guru' => $guru]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function uploadMapel(Request $request)
     {
@@ -91,8 +118,12 @@ class penggunaController extends Controller
     }
     public function updateMapel($id)
     {
-        $mapel = mapel::find($id);
-        return view('contents.updateMapel', ['mapel' => $mapel]);
+        if (session()->exists('is_login')) {
+            $mapel = mapel::find($id);
+            return view('contents.updateMapel', ['mapel' => $mapel]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function updateMapelFinal(Request $request)
     {
@@ -106,15 +137,23 @@ class penggunaController extends Controller
     }
     public function deleteMapel($id)
     {
-        $mapel = mapel::find($id);
-        $mapel->delete();
-        return redirect('/home');
+        if (session()->exists('is_login')) {
+            $mapel = mapel::find($id);
+            $mapel->delete();
+            return redirect('/home');
+        } else {
+            return redirect("/login");
+        }
     }
 
     public function createBab($id)
     {
-        $mapel = mapel::find($id);
-        return view("Contents.insertBab", ['mapel' => $mapel]);
+        if (session()->exists('is_login')) {
+            $mapel = mapel::find($id);
+            return view("Contents.insertBab", ['mapel' => $mapel]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function uploadBab(Request $request)
     {
@@ -130,8 +169,12 @@ class penggunaController extends Controller
     }
     public function createKelas()
     {
-        $daftar_kelas = kelas::all();
-        return view("contents.createKelas", ['daftar_kelas' => $daftar_kelas]);
+        if (session()->exists('is_login')) {
+            $daftar_kelas = kelas::all();
+            return view("contents.createKelas", ['daftar_kelas' => $daftar_kelas]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function uploadKelas(Request $request)
     {
@@ -147,6 +190,10 @@ class penggunaController extends Controller
     {
         $kelas = kelas::find($id);
         return view('contents.updateKelas', ['kelas' => $kelas]);
+        if (session()->exists('is_login')) {
+        } else {
+            return redirect("/login");
+        }
     }
     public function updateKelasFinal(Request $request)
     {
@@ -160,14 +207,22 @@ class penggunaController extends Controller
     }
     public function deleteKelas($id)
     {
-        $kelas = kelas::find($id);
-        $kelas->delete();
-        return redirect('/home');
+        if (session()->exists('is_login')) {
+            $kelas = kelas::find($id);
+            $kelas->delete();
+            return redirect('/home');
+        } else {
+            return redirect("/login");
+        }
     }
     public function assignMapel()
     {
-        $daftar_mapel = mapel::all();
-        return view("contents.assignMapel", ['daftar_mapel' => $daftar_mapel]);
+        if (session()->exists('is_login')) {
+            $daftar_mapel = mapel::all();
+            return view("contents.assignMapel", ['daftar_mapel' => $daftar_mapel]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function assignMapelFinal(Request $request)
     {
@@ -190,8 +245,12 @@ class penggunaController extends Controller
     }
     public function createTugas($id_bab)
     {
-        $bab = bab::find($id_bab);
-        return view("contents.createTugas", ['bab' => $bab]);
+        if (session()->exists('is_login')) {
+            $bab = bab::find($id_bab);
+            return view("contents.createTugas", ['bab' => $bab]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function createTugasFinal(Request $request)
     {
@@ -211,37 +270,45 @@ class penggunaController extends Controller
     }
     public function menuTugas($id)
     {
-        $tugas = tugas::find($id);
-        $deadline = date('Y-m-d H:i:s', strtotime("$tugas->deadline"));
-        $interval = Carbon::now()->diff($deadline);
-        $remaining = $interval->format('%y %m %d %h:%i:%s');
-        $remaining = explode(" ", $remaining);
-        $email = session('email');
-        $data_user = pengguna::where('email', $email)->get();
-        $id_siswa = $data_user[0]->id;
-        $data_tugas = siswa_tugas::where('id_siswa', $id_siswa)->get();
-        if (count($data_tugas) == 0) {
-            $status = "Belum Mengumpulkan";
+        if (session()->exists('is_login')) {
+            $tugas = tugas::find($id);
+            $deadline = date('Y-m-d H:i:s', strtotime("$tugas->deadline"));
+            $interval = Carbon::now()->diff($deadline);
+            $remaining = $interval->format('%y %m %d %h:%i:%s');
+            $remaining = explode(" ", $remaining);
+            $email = session('email');
+            $data_user = pengguna::where('email', $email)->get();
+            $id_siswa = $data_user[0]->id;
+            $data_tugas = siswa_tugas::where('id_siswa', $id_siswa)->get();
+            if (count($data_tugas) == 0) {
+                $status = "Belum Mengumpulkan";
+            } else {
+                $status = "Sudah Mengumpulkan";
+            }
+            return view('contents.detailTugas', ['tugas' => $tugas, 'remaining' => $remaining, 'status' => $status, 'data_tugas' => $data_tugas]);
         } else {
-            $status = "Sudah Mengumpulkan";
+            return redirect("/login");
         }
-        return view('contents.detailTugas', ['tugas' => $tugas, 'remaining' => $remaining, 'status' => $status]);
     }
     public function menuTugasProcess($id)
     {
-        $tugas = tugas::find($id);
-        $email = session('email');
-        $data_user = pengguna::where('email', $email)->get();
-        $id_siswa = $data_user[0]->id;
-        return view('contents.uploadTugas', ['tugas' => $tugas, 'id_siswa' => $id_siswa]);
+        if (session()->exists('is_login')) {
+            $tugas = tugas::find($id);
+            $email = session('email');
+            $data_user = pengguna::where('email', $email)->get();
+            $id_siswa = $data_user[0]->id;
+            return view('contents.uploadTugas', ['tugas' => $tugas, 'id_siswa' => $id_siswa]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function submitTugas(Request $request)
     {
         if ($files = $request->file('file')) {
-            $file = $request->file('file');
+            $files = $request->file('file');
             $lokasi = 'uploaded/tugas/';
             $nama_file = $files->getClientOriginalName();
-            $pathTugas = $file->storeAs('tugas', $nama_file);
+            $pathTugas = $files->storeAs('tugas', $nama_file);
             $files->move($lokasi, $nama_file);
             $tugas_siswa = new siswa_tugas();
             $tugas_siswa->id_tugas = $request->id_tugas;
@@ -253,17 +320,35 @@ class penggunaController extends Controller
             return redirect('/home');
         }
     }
+    public function hapusTugas($id)
+    {
+        if (session()->exists('is_login')) {
+            $tugas = siswa_tugas::find($id);
+            $tugas->delete();
+            return redirect("/home");
+        } else {
+            return redirect("/login");
+        }
+    }
     public function cekTugas($id)
     {
-        $daftar_submission = siswa_tugas::where('id_tugas', $id)->get();
-        return view('contents.tugasSubmission', ['daftar_submission' => $daftar_submission]);
+        if (session()->exists('is_login')) {
+            $daftar_submission = siswa_tugas::where('id_tugas', $id)->get();
+            return view('contents.tugasSubmission', ['daftar_submission' => $daftar_submission]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function downloadTugas($id)
     {
-        $tugas = siswa_tugas::find($id);
-        $nama_file = $tugas->file_upload;
-        $filepath = public_path('uploaded/' . $nama_file);
-        return Response()->download($filepath);
+        if (session()->exists('is_login')) {
+            $tugas = siswa_tugas::find($id);
+            $nama_file = $tugas->file_upload;
+            $filepath = public_path('uploaded/' . $nama_file);
+            return Response()->download($filepath);
+        } else {
+            return redirect("/login");
+        }
     }
     public function nilaiTugas(Request $request)
     {
@@ -276,8 +361,12 @@ class penggunaController extends Controller
     }
     public function createMateri($id)
     {
-        $detail_bab = bab::find($id);
-        return view("contents.createMateri", ['detail_bab' => $detail_bab]);
+        if (session()->exists('is_login')) {
+            $detail_bab = bab::find($id);
+            return view("contents.createMateri", ['detail_bab' => $detail_bab]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function uploadMateri(Request $request)
     {
@@ -300,14 +389,22 @@ class penggunaController extends Controller
     }
     public function lihatMateri($id)
     {
-        $materi = materi::find($id);
-        $nama_file = $materi->file_upload;
-        $filepath = public_path('uploaded/' . $nama_file);
-        return Response()->download($filepath);
+        if (session()->exists('is_login')) {
+            $materi = materi::find($id);
+            $nama_file = $materi->file_upload;
+            $filepath = public_path('uploaded/' . $nama_file);
+            return Response()->download($filepath);
+        } else {
+            return redirect("/login");
+        }
     }
     public function createPengguna()
     {
-        return view('contents.createPengguna');
+        if (session()->exists('is_login')) {
+            return view('contents.createPengguna');
+        } else {
+            return redirect("/login");
+        }
     }
     public function registerPengguna(Request $request)
     {
@@ -325,8 +422,12 @@ class penggunaController extends Controller
     }
     public function updatePengguna($id)
     {
-        $pengguna = pengguna::find($id);
-        return view("contents.updatePengguna", ['pengguna' => $pengguna]);
+        if (session()->exists('is_login')) {
+            $pengguna = pengguna::find($id);
+            return view("contents.updatePengguna", ['pengguna' => $pengguna]);
+        } else {
+            return redirect("/login");
+        }
     }
     public function updatePenggunaFinal(Request $request)
     {
@@ -345,8 +446,12 @@ class penggunaController extends Controller
     }
     public function deletePengguna($id)
     {
-        $pengguna = pengguna::find($id);
-        $pengguna->delete();
-        return redirect('/home');
+        if (session()->exists('is_login')) {
+            $pengguna = pengguna::find($id);
+            $pengguna->delete();
+            return redirect('/home');
+        } else {
+            return redirect("/login");
+        }
     }
 }

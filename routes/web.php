@@ -17,6 +17,7 @@ use App\Http\Controllers\penggunaController;
 Route::get('/', function () {
     return view('contents.welcome');
 });
+Route::get('/profile', [penggunaController::class, 'profile'])->name('profile');
 
 Route::get('/createPengguna', [penggunaController::class, 'createPengguna'])->name('create pengguna');
 Route::post('/createPengguna', [penggunaController::class, 'registerPengguna'])->name('register pengguna');
@@ -40,6 +41,7 @@ Route::get('/updateKelas/{id}', [penggunaController::class, 'updateKelas'])->nam
 Route::post('/updateKelas', [penggunaController::class, 'updateKelasFinal'])->name('update kelas final');
 
 Route::get('/insertMapel', [penggunaController::class, 'createMapel'])->name('create mapel');
+Route::get('/lihatMapel/{id}', [penggunaController::class, 'lihatMapel'])->name('lihat mapel');
 Route::post('/insertMapel', [penggunaController::class, 'uploadMapel'])->name('upload mapel');
 Route::get('/updateMapel/{id}', [penggunaController::class, 'updateMapel'])->name('update mapel');
 Route::post('/updateMapel', [penggunaController::class, 'updateMapelFinal'])->name('update mapel final');
@@ -54,6 +56,7 @@ Route::post('/createTugas', [penggunaController::class, 'createTugasFinal'])->na
 
 Route::get('/tugas/{id}', [penggunaController::class, 'menuTugas'])->name('menu tugas');
 Route::get('/tugas/submit/{id}', [penggunaController::class, 'menuTugasProcess'])->name('menu tugas process');
+Route::get('/hapusTugas/{id}', [penggunaController::class, 'hapusTugas'])->name('hapus tugas');
 Route::post('/tugas/submit', [penggunaController::class, 'submitTugas'])->name('submit tugas');
 Route::get('/cekTugas/{id}', [penggunaController::class, 'cekTugas'])->name('cek tugas');
 Route::get('/downloadTugas/{id}', [penggunaController::class, 'downloadTugas'])->name('download tugas');
