@@ -32,7 +32,7 @@
 
                 <div class="d-flex flex-row-reverse bd-highlight align-items-center">
                     <div class=" bd-highlight">
-                        <a class="nav-link d-flex fs-5 align-self-center" aria-current="page" href="#">
+                        <a class="nav-link d-flex fs-5 align-self-center" aria-current="page" href="{{ route('profile') }}">
                             <b class="p-1 mx-2" style="color: #004267;">Hi, {{ session('nama') }}</b>
                             <i class="fas fa-user" id="" style="color: #004267; font-size: 35px;"></i>
                         </a>

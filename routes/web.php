@@ -17,6 +17,7 @@ use App\Http\Controllers\penggunaController;
 Route::get('/', function () {
     return view('contents.welcome');
 });
+Route::get('/profile', [penggunaController::class, 'profile'])->name('profile');
 
 Route::get('/createPengguna', [penggunaController::class, 'createPengguna'])->name('create pengguna');
 Route::post('/createPengguna', [penggunaController::class, 'registerPengguna'])->name('register pengguna');

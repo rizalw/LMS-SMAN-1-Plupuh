@@ -58,6 +58,22 @@
 
                 <div class="row mb-3 p-2" style="background-color: #EEEFFA;">
                     <div class="col-2">
+                        <p class="m-0" style="color: #13638F;">Terakhir Diubah</p>
+                    </div>
+                    <div class="col-1">
+                        <p class="m-0" style="color: #004267;">:</p>
+                    </div>
+                    <div class="col-8">
+                        <?php if (isset($data_tugas[0])) : ?>
+                            <p class="m-0" style="color: #004267;">{{ $data_tugas[0]->updated_at }} WIB</p>
+                        <?php else : ?>
+                            <p class="m-0" style="color: #004267;"></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="row mb-3 p-2" style="background-color: #EEEFFA;">
+                    <div class="col-2">
                         <p class="m-0" style="color: #13638F;">Nilai</p>
                     </div>
                     <div class="col-1">
