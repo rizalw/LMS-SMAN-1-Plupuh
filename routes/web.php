@@ -70,3 +70,4 @@ Route::post('/nilaiTugas', [penggunaController::class, 'nilaiTugas'])->name('nil
 Route::get('/createMateri/{id}', [penggunaController::class, 'createMateri'])->name('create materi');
 Route::post('/createMateri', [penggunaController::class, 'uploadMateri'])->name('upload materi');
 Route::get('/lihatMateri/{id}', [penggunaController::class, 'lihatMateri'])->name('lihat materi');
+Route::get('/hapusMateri/{id}', [penggunaController::class, 'hapusMateri'])->name('hapus materi');

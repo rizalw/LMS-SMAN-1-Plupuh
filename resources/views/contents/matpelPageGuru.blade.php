@@ -16,7 +16,7 @@
                 <h5 style="color: #13638F;">Deskripsi Mata Pelajaran {{ $mapel->nama }}</h5>
                 <p style="color: #13638F;" class="mx-2">{{ $mapel->deskripsi }}</p>
             </div>
-            <div class="col-2">
+            <div class="col-2 d-flex justify-content-center">
                 <a href="#" style="color: black; text-decoration:none;" data-bs-toggle="modal" data-bs-target="#modalDeskripsi" >Update Deskripsi</a>
             </div>
         </div>
@@ -59,11 +59,18 @@
                     <b>Materi Pembelajaran</b>
                     @foreach($daftar_materi as $materi)
                     @if($materi->id_bab == $bab->id)
-                    <div style="color: #13638F;" class="mt-1 d-flex">
-                        <img src="{{ asset('images/music video.png') }}" alt="" style="height: 1.5em;">
-                        <a href="{{ route('lihat materi', ['id' => $materi->id ]) }}" style="color: black; text-decoration:none;">
-                            <p class="m-0">{{ $materi->nama}}</p>
-                        </a>
+                    <div class="row">
+                        <div class="col-3">
+                            <div style="color: #13638F;" class="mt-1 d-flex">
+                                <img src="{{ asset('images/music video.png') }}" alt="" style="height: 1.5em;">
+                                <a href="{{ route('lihat materi', ['id' => $materi->id ]) }}" style="color: black; text-decoration:none;">
+                                    <p class="m-0">{{ $materi->nama}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <a href="{{ route('hapus materi', ['id' => $materi->id ]) }}" class="btn btn-danger ">Hapus Materi</a>
+                        </div>
                     </div>
                     <p>{{ $materi->deskripsi}}</p>
                     @endif

@@ -167,18 +167,21 @@ class penggunaController extends Controller
             return redirect("/login");
         }
     }
-    public function updateBab($id){
+    public function updateBab($id)
+    {
         $bab = bab::find($id);
         return view("contents.updateBab", ['bab' => $bab]);
     }
-    public function updateBabFinal(Request $request){
+    public function updateBabFinal(Request $request)
+    {
         $bab = bab::find($request->id_bab);
         $bab->nama = $request->nama;
         $bab->deskripsi = $request->deskripsi;
         $bab->save();
         return redirect('/home');
     }
-    public function deleteBab($id){
+    public function deleteBab($id)
+    {
         $bab = bab::find($id);
         $bab->delete();
         return redirect('/home');
@@ -387,7 +390,8 @@ class penggunaController extends Controller
         $submission->save();
         return redirect('/home');
     }
-    public function updateDeskripsi(Request $request){
+    public function updateDeskripsi(Request $request)
+    {
         $id_mapel = $request->id_mapel;
         $deskripsi = $request->deskripsi;
         $mapel = mapel::find($id_mapel);
@@ -430,6 +434,16 @@ class penggunaController extends Controller
             $nama_file = $materi->file_upload;
             $filepath = public_path('uploaded/' . $nama_file);
             return Response()->download($filepath);
+        } else {
+            return redirect("/login");
+        }
+    }
+    public function hapusMateri($id)
+    {
+        if (session()->exists('is_login')) {
+            $materi = materi::find($id);
+            $materi->delete();
+            return redirect("/home");
         } else {
             return redirect("/login");
         }
