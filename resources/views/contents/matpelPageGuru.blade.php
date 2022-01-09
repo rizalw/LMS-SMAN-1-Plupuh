@@ -92,7 +92,8 @@
                             </div>
                         </div>
                         <div class="col-9">
-                            <a href="{{ route('hapus tugas', ['id' => $tugas-> id ]) }}" style="color: red;">Hapus tugas</a>
+                            <a href="{{ route('cek tugas', ['id' => $tugas-> id , 'id_bab' => $tugas->id_bab ]) }}" style="color: black; text-decoration:none;">Cek Submission</a>
+                            <a href="{{ route('hapus tugas', ['id' => $tugas-> id ]) }}" style="color: red; text-decoration:none;">Hapus tugas</a>
                         </div>
                     </div>
                     @endif

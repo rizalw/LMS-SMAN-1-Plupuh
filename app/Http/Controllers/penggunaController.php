@@ -361,11 +361,12 @@ class penggunaController extends Controller
             return redirect("/login");
         }
     }
-    public function cekTugas($id)
+    public function cekTugas($id, $id_bab)
     {
         if (session()->exists('is_login')) {
             $daftar_submission = siswa_tugas::where('id_tugas', $id)->get();
-            return view('contents.tugasSubmission', ['daftar_submission' => $daftar_submission]);
+            $bab = bab::find($id_bab);
+            return view('contents.tugasSubmission', ['daftar_submission' => $daftar_submission, 'bab' => $bab]);
         } else {
             return redirect("/login");
         }

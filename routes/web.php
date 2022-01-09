@@ -63,7 +63,7 @@ Route::get('/tugas/{id}', [penggunaController::class, 'menuTugas'])->name('menu 
 Route::get('/tugas/submit/{id}', [penggunaController::class, 'menuTugasProcess'])->name('menu tugas process');
 Route::get('/hapusTugas/{id}', [penggunaController::class, 'hapusTugas'])->name('hapus tugas');
 Route::post('/tugas/submit', [penggunaController::class, 'submitTugas'])->name('submit tugas');
-Route::get('/cekTugas/{id}', [penggunaController::class, 'cekTugas'])->name('cek tugas');
+Route::get('/cekTugas/{id}/{id_bab}', [penggunaController::class, 'cekTugas'])->name('cek tugas');
 Route::get('/downloadTugas/{id}', [penggunaController::class, 'downloadTugas'])->name('download tugas');
 Route::post('/nilaiTugas', [penggunaController::class, 'nilaiTugas'])->name('nilai tugas');
 

@@ -16,7 +16,7 @@
     @yield("title")
 </head>
 
-<body>
+<body style="overflow-x:hidden">
     <!-- Navbar -->
     <nav class="navbar navbar-custom navbar-expand-lg" style="background-color: #C2E8F9;">
         <div class="container-fluid">
