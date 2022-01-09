@@ -354,7 +354,7 @@ class penggunaController extends Controller
     public function hapusTugas($id)
     {
         if (session()->exists('is_login')) {
-            $tugas = siswa_tugas::find($id);
+            $tugas = tugas::find($id);
             $tugas->delete();
             return redirect("/home");
         } else {

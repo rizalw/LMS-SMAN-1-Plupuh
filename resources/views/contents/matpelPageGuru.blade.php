@@ -17,7 +17,7 @@
                 <p style="color: #13638F;" class="mx-2">{{ $mapel->deskripsi }}</p>
             </div>
             <div class="col-2 d-flex justify-content-center">
-                <a href="#" style="color: black; text-decoration:none;" data-bs-toggle="modal" data-bs-target="#modalDeskripsi" >Update Deskripsi</a>
+                <a href="#" style="color: black; text-decoration:none;" data-bs-toggle="modal" data-bs-target="#modalDeskripsi">Update Deskripsi</a>
             </div>
         </div>
         <!-- Modal Deskripsi -->
@@ -109,11 +109,18 @@
                     <b>Tugas</b><br>
                     @foreach($daftar_tugas as $tugas)
                     @if($tugas->id_bab == $bab->id)
-                    <div style="color: #13638F;" class="mt-1 d-flex ms-1 my-2">
-                        <img src="{{ asset('images/Brief.png') }}" alt="" style="height: 1.5em;">
-                        <a href="{{ route('menu tugas', ['id' => $tugas -> id ]) }}" style="color: black; text-decoration:none;">
-                            <p class="m-0">{{ $tugas->nama }}</p>
-                        </a>
+                    <div class="row">
+                        <div class="col-3">
+                            <div style="color: #13638F;" class="mt-3 d-flex ms-1 my-2">
+                                <img src="{{ asset('images/Brief.png') }}" alt="" style="height: 1.5em;">
+                                <a href="{{ route('menu tugas', ['id' => $tugas -> id ]) }}" style="color: black; text-decoration:none;">
+                                    <p class="m-0">{{ $tugas->nama }}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <a href="{{ route('hapus tugas', ['id' => $tugas-> id ]) }}" class="btn btn-danger ">Hapus tugas</a>
+                        </div>
                     </div>
                     @endif
                     @endforeach
