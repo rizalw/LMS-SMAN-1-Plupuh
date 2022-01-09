@@ -399,10 +399,10 @@ class penggunaController extends Controller
     public function uploadMateri(Request $request)
     {
         if ($files = $request->file('file')) {
-            $file = $request->file('file');
+            $files = $request->file('file');
             $lokasi = 'uploaded/materi/';
             $nama_file = $files->getClientOriginalName();
-            $pathMateri = $file->storeAs('materi', $nama_file);
+            $pathMateri = $files->storeAs('materi', $nama_file);
             $files->move($lokasi, $nama_file);
             $materi = new materi();
             $materi->id_bab = $request->id_bab;
