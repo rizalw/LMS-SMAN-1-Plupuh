@@ -13,15 +13,14 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
-    <title>Navbar Landing Page</title>
-
+    @yield("title")
 </head>
 
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-custom navbar-expand-lg" style="background-color: #C2E8F9;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="../img/logo sekolah.png" alt="" width="60"></a>
+            <a class="navbar-brand" href="#"><img src="images/logo sma.png" alt="" width="60"></a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -34,14 +33,16 @@
                 <div class="d-flex flex-row-reverse bd-highlight align-items-center">
                     <div class=" bd-highlight">
                         <a class="nav-link fs-5" aria-current="page" href="#">
-                            <b class="p-1" style="color: #004267;">Masuk</b>
-                            <img src="../img/enter.png" alt="" width="35">
+                        <b class="p-1" data-bs-toggle="modal" data-bs-target="#exampleModal" style="color: #004267;">Masuk</b>
+                            <img src="images/enter.png" alt="" width="35">
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+
+    @yield("main")
 
     <!-- Footer -->
     <footer style="background-color: #004267;" class="fixed-bottom">
@@ -66,7 +67,7 @@
             </div>
 
             <div class="col-2 d-flex align-items-center">
-                <img src="../img/logo sekolah.png" alt="" class="mx-auto d-block" width="110">
+                <img src="images/logo sekolah.png" alt="" class="mx-auto d-block" width="110">
             </div>
 
             <div class="col-5">
@@ -76,24 +77,13 @@
                         <i class="fab fa-instagram" style="font-size: 30px;"></i>
                         <i class="fab fa-facebook-square" style="font-size: 30px;"></i>
                     </div>
-                    <!-- <li class="nav-item"><a href="#" class="nav-link px-2" style="color: white !important;">Home</a></li> -->
                 </ul>
             </div>
         </div>
     </footer>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
 </body>
 
 </html>

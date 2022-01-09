@@ -11,16 +11,16 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
-    <title>Navbar Login</title>
+    @yield("title")
 
 </head>
 
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-custom navbar-expand-lg" style="background-color: #C2E8F9;">
+    <nav class="navbar navbar-custom navbar-expand-lg shadow" style="background-color: #C2E8F9;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="../img/logo sekolah.png" alt="" width="60"></a>
+            <a class="navbar-brand" href="#"><img src="images/logo sma.png" alt="" width="60"></a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -33,7 +33,7 @@
                 <div class="d-flex flex-row-reverse bd-highlight align-items-center">
                     <div class=" bd-highlight">
                         <a class="nav-link d-flex fs-5 align-self-center" aria-current="page" href="#">
-                            <b class="p-1 mx-2" style="color: #004267;">Hi, Rahma</b>
+                            <b class="p-1 mx-2" style="color: #004267;">Hi, {{ $nama }}</b>
                             <i class="fas fa-user" id="" style="color: #004267; font-size: 35px;"></i>
                         </a>
                     </div>
@@ -42,6 +42,7 @@
         </div>
     </nav>
 
+    @yield('main')
     <!-- Footer -->
     <footer style="background-color: #004267;" class="fixed-bottom">
         <div class="row">
@@ -65,7 +66,7 @@
             </div>
 
             <div class="col-2 d-flex align-items-center">
-                <img src="../img/logo sekolah.png" alt="" class="mx-auto d-block" width="110">
+                <img src="images/logo sekolah.png" alt="" class="mx-auto d-block" width="110">
             </div>
 
             <div class="col-5">

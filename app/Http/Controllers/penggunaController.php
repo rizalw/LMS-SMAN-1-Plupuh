@@ -20,7 +20,7 @@ class penggunaController extends Controller
 {
     public function login()
     {
-        return view("contents.login");
+        return view("contents.welcome");
     }
     public function loginQuery(Request $request)
     {
