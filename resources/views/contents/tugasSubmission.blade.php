@@ -8,9 +8,17 @@
 <!-- Content -->
 <div class="container w-75 mx-auto py-3" style="background-color: #EEEFFA; min-height: 100%; margin-bottom:180px">
     <h3 class="mx-2" style="color: #13638F;"></h3>
-    <p class="mx-2" style="color: #13638F;"> <a href="dashboardSiswa.html" style="text-decoration: none; color: #13638F;">Dashboard</a> / <a href="profileSiswa.html" style="text-decoration: none; color: #13638F;">Course</a> / <a href="matpelPage.html" style="text-decoration: none; color: #13638F;">{{ $daftar_submission[0]->tugas->babs->mapels->nama }}</a> / {{ $daftar_submission[0]->tugas->nama }}</p>
+    <?php if (isset($daftar_submission[0])) : ?>
+        <p class="mx-2" style="color: #13638F;"> <a href="dashboardSiswa.html" style="text-decoration: none; color: #13638F;">Dashboard</a> / <a href="profileSiswa.html" style="text-decoration: none; color: #13638F;">Course</a> / <a href="matpelPage.html" style="text-decoration: none; color: #13638F;">{{ $daftar_submission[0]->tugas->babs->mapels->nama }}</a> / {{ $daftar_submission[0]->tugas->nama }}</p>
+    <?php else : ?>
+        <p class="mx-2" style="color: #13638F;"> <a href="dashboardSiswa.html" style="text-decoration: none; color: #13638F;">Dashboard</a> / <a href="profileSiswa.html" style="text-decoration: none; color: #13638F;">Course</a> / <a href="matpelPage.html" style="text-decoration: none; color: #13638F;">Mata Pelajaran</a> / Tugas</p>
+    <?php endif; ?>
     <div class="container" style="background-color: white;">
+        <?php if(isset($daftar_submission[0])) :?>
         <h4 style="color: #13638F;" class="text-center">Pengumpulan {{ $daftar_submission[0]->tugas->nama }}</h4>
+        <?php else: ?>
+        <h4 style="color: #13638F;" class="text-center">Pengumpulan Tugas</h4>
+        <?php endif;?>
         <table class="table table-bordered">
             <thead>
                 <tr>
