@@ -15,7 +15,9 @@
             </div>
             <div style="padding-top: 7rem;" class="ms-3">
                 <h3 class="m-0">{{ $siswa->Nama}}</h3>
+                <?php if(isset($siswa->kelas->nama_kelas)): ?>
                 <p class="fw-bold">{{ $siswa->kelas->nama_kelas}}</p>
+                <?php endif;?>
             </div>
         </div>
         <a href="{{ route('logout') }}">
@@ -27,6 +29,7 @@
 <div class="container-fluid w-100 mb-5" style="padding: 2% 8%;">
     <div class="bg-white p-3" style="border-radius: 10px;">
         <h3>Course</h3>
+        <?php if(isset($data_siswa->kelas->mapels)): ?>
         @foreach($siswa->kelas->mapels as $mapel)
         <div class="row">
             <!-- Mulai looping dari col -->
@@ -39,6 +42,7 @@
             </div>
         </div>
         @endforeach
+        <?php endif;?>
     </div>
 </div>
 @endsection

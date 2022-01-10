@@ -62,7 +62,7 @@
                                 <form action="{{route('assign siswa final')}}" method="post">
                                     <div class="modal-body">
                                         @csrf
-                                        <input type="text" name="id_siswa" id="" value="{{ $p->id }}">
+                                        <input type="text" name="id_siswa" id="" value="{{ $p->id }}" hidden>
                                         <label for="" class="form-text">Kelas yang ingin diassign</label>
                                         <select name="id_kelas" id="" class="form-control">
                                             <option value="" selected></option>

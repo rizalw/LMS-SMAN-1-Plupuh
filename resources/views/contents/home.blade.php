@@ -19,6 +19,7 @@
                 <h3 class="mx-2" style="color: #13638F;">Selamat Datang, {{ $nama }}</h3>
                 <div class="container p-3" style="background-color: white;">
                     <h4 style="color: #13638F;">Course</h4>
+                    <?php if(isset($data_siswa->kelas->mapels)): ?>
                     @foreach($data_siswa->kelas->mapels as $mapel)
                     <div class="p-3 mb-3" style="background-color: #EEEFFA;">
                         <div class="row">
@@ -36,6 +37,7 @@
                         </div>
                     </div>
                     @endforeach
+                    <?php endif;?>
                 </div>
             </div>
         </div>
